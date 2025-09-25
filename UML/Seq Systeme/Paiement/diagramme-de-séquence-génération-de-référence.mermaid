@@ -1,0 +1,9 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+
+    Utilisateur->>IHM: Cliquer sur "Générer" (bouton de référence)
+    IHM->>Ctrl: handleGenererReference()
+    Ctrl->>Ctrl: Générer une référence unique (préfixe + timestamp + nombre aléatoire)
+    Ctrl->>IHM: Mettre à jour le champ de référence

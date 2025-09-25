@@ -1,0 +1,50 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as PaiementService
+    participant Rep as PaiementRep
+    participant CandidatSvc as CandidatService
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Cliquer sur "Ajouter"
+    IHM->>Ctrl: handleAjouter()
+    Ctrl->>Ctrl: clearForm()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Afficher formulaire vide
+    Utilisateur->>IHM: Sélectionner un candidat
+    IHM->>Ctrl: candidatComboBox.valueProperty().listener
+    Ctrl->>Ctrl: updatePaiementProgress(candidatId)
+    Ctrl->>Svc: getTotalPaiementsByCandidatId(candidatId)
+    Svc->>Rep: getByCandidatId(candidatId)
+    Rep->>DB: SELECT * FROM paiements WHERE candidat_id = ?
+    DB->>Rep: Liste des paiements
+    Rep->>Svc: Liste des paiements
+    Svc->>Ctrl: Total des paiements
+    Ctrl->>Ctrl: calculateTotalDuForCandidat(candidatId)
+    Ctrl->>Ctrl: calculateResteAPayer(candidatId)
+    Ctrl->>IHM: Mettre à jour la barre de progression et les labels
+    Utilisateur->>IHM: Sélectionner type de paiement (Complet/Partiel)
+    Utilisateur->>IHM: Remplir montant, méthode, référence, etc.
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: Valider le formulaire
+    alt Validation réussie
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer enregistrement
+        Ctrl->>Ctrl: Créer objet Paiement
+        Ctrl->>Svc: savePaiement(paiement)
+        Svc->>Rep: save(paiement)
+        Rep->>DB: INSERT INTO paiements
+        DB->>Rep: ID généré
+        Rep->>Svc: Paiement avec ID
+        Svc->>Ctrl: Paiement enregistré
+        Ctrl->>Audit: logAction("CREATE", "PAIEMENT", id, message)
+        Ctrl->>Ctrl: loadPaiements()
+        Ctrl->>Ctrl: clearForm()
+        Ctrl->>Ctrl: disableForm(true)
+        Ctrl->>IHM: Afficher notification de succès
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

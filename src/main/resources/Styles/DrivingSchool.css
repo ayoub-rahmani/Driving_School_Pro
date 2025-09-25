@@ -1,0 +1,132 @@
+/* Driving School Screen Specific Styles */
+.driving-school-container {
+    -fx-background-image: url("../images/1.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Main form container with 0.2 transparency */
+.driving-school-form {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* 0.2 opacity as requested */
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 0);
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-padding: 24;
+}
+
+/* Header */
+.driving-school-header {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 0);
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+}
+
+/* Logo placeholder */
+.photo-placeholder {
+    -fx-background-radius: 60px;
+    -fx-border-radius: 60px;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 4;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 8, 0, 0, 0);
+}
+
+/* Form elements */
+.form-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-weight: 600;
+}
+
+.form-label:hover {
+    -fx-text-fill: -fx-primary;
+}
+
+.form-field {
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: #aaaaaa;
+    -fx-padding: 12 16;
+}
+
+.form-field:focused {
+    -fx-border-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 71, 171, 0.15), 5, 0, 0, 0);
+}
+
+.form-field:hover {
+    -fx-border-color: #777777;
+}
+
+/* Content background */
+.content-background {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* 0.2 opacity as requested */
+}
+
+/* Section label */
+.section-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10 18;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: derive(-fx-primary, 15%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* Icon button styling */
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50%;
+    -fx-padding: 8;
+    -fx-border-radius: 50%;
+    -fx-border-width: 0;
+}
+
+.icon-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 4, 0, 0, 0);
+}
+
+/* TitledPane styling */
+.titled-pane {
+    -fx-text-fill: -fx-primary-dark;
+    -fx-font-weight: bold;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 10 10 0 0;
+    -fx-padding: 12;
+}
+
+.titled-pane > .content {
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 10 10;
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 0 2 2 2;
+    -fx-border-radius: 0 0 10 10;
+}

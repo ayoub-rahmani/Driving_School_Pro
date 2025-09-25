@@ -1,0 +1,76 @@
+/* Document Preview Specific Styles */
+
+.document-preview-container {
+    -fx-background-color: rgba(30, 41, 59, 0.95);
+}
+
+.document-preview-content {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 15, 0, 0, 0);
+}
+
+.document-preview-header {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 12 12 0 0;
+    -fx-padding: 15;
+}
+
+.document-preview-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.document-preview-close-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 5 10;
+    -fx-cursor: hand;
+}
+
+.document-preview-close-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 4;
+}
+
+.document-preview-image {
+    -fx-background-color: white;
+    -fx-border-color: -fx-medium-gray;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.document-preview-web {
+    -fx-border-color: -fx-medium-gray;
+    -fx-border-radius: 0 0 8 8;
+    -fx-background-radius: 0 0 8 8;
+}
+
+.document-preview-toolbar {
+    -fx-background-color: -fx-light-gray;
+    -fx-background-radius: 0 0 12 12;
+    -fx-padding: 10;
+    -fx-border-color: -fx-medium-gray;
+    -fx-border-width: 1 0 0 0;
+}
+
+.document-preview-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4;
+    -fx-padding: 8 15;
+}
+
+.document-preview-button:hover {
+    -fx-background-color: derive(-fx-primary, 20%);
+}
+
+.document-preview-body {
+    -fx-padding: 0;
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 12 12;
+}
+

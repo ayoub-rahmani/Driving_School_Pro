@@ -1,0 +1,27 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as MoniteurController
+    participant Svc as MoniteurService
+    participant Rep as MoniteurRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un moniteur
+    IHM->>Ctrl: selectedItemProperty().listener
+    Ctrl->>Ctrl: populateForm(selectedMoniteur)
+    Utilisateur->>IHM: Cliquer sur "Supprimer"
+    IHM->>Ctrl: handleSupprimer()
+    Ctrl->>IHM: Afficher dialogue de confirmation
+    Utilisateur->>IHM: Confirmer suppression
+    IHM->>Ctrl: Confirmation
+    Ctrl->>Audit: logAction("DELETE", "MONITEUR", id, message)
+    Ctrl->>Svc: deleteMoniteur(selectedMoniteur)
+    Svc->>Rep: delete(moniteur)
+    Rep->>DB: DELETE FROM moniteur WHERE id = ?
+    DB->>Rep: Nombre de lignes affectées
+    Rep->>Svc: Confirmation
+    Svc->>Ctrl: Confirmation
+    Ctrl->>Ctrl: moniteurTable.getItems().remove(selectedMoniteur)
+    Ctrl->>Ctrl: clearForm()
+    Ctrl->>IHM: Afficher notification de succès

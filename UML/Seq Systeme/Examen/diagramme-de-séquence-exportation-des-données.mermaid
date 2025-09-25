@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as ExamenController
+    participant FC as FileChooser
+    participant File as Système de Fichiers
+
+    Utilisateur->>IHM: Cliquer sur "Exporter les données"
+    IHM->>Ctrl: handleExport()
+    Ctrl->>FC: Créer FileChooser
+    Ctrl->>FC: Définir titre et filtres
+    FC->>IHM: Afficher dialogue de sélection de fichier
+    Utilisateur->>FC: Sélectionner emplacement et nom du fichier
+    FC->>Ctrl: Retourner le fichier sélectionné
+    Ctrl->>Ctrl: exportToCSV(file)
+    Ctrl->>File: Écrire en-têtes CSV
+    Ctrl->>Ctrl: Parcourir examenTable.getItems()
+    loop Pour chaque examen
+        Ctrl->>File: Écrire ligne CSV avec données de l'examen
+    end
+    Ctrl->>IHM: Afficher notification de succès

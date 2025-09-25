@@ -1,0 +1,119 @@
+/* Document Preview Styles */
+
+.document-preview-container {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #e9ecef;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+}
+
+.header {
+    -fx-background-color: #bc0c0c;
+    -fx-padding: 10px;
+}
+
+.header-label {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.footer {
+    -fx-background-color: #f1f3f5;
+    -fx-padding: 10px;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.footer-label {
+    -fx-text-fill: #495057;
+    -fx-font-size: 12px;
+}
+
+.document-path-label {
+    -fx-text-fill: #495057;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.error-label {
+    -fx-text-fill: #dc3545;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.section-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #343a40;
+}
+
+/* Image container styling */
+.image-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-padding: 10px;
+}
+
+/* PDF container styling */
+.pdf-container {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4px;
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #bc0c0c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+}
+
+.button:hover {
+    -fx-background-color: #a00a0a;
+}
+
+.button:pressed {
+    -fx-background-color: #8a0808;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.icon-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ScrollPane styling */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+

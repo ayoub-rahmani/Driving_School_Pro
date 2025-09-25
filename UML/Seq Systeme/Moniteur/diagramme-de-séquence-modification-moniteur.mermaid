@@ -1,0 +1,56 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as MoniteurController
+    participant Svc as MoniteurService
+    participant Rep as MoniteurRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un moniteur
+    IHM->>Ctrl: selectedItemProperty().listener
+    Ctrl->>Ctrl: populateForm(selectedMoniteur)
+    Utilisateur->>IHM: Cliquer sur "Modifier"
+    IHM->>Ctrl: handleModifier()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Activer formulaire
+    Utilisateur->>IHM: Modifier les données
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: validateForm()
+    alt Validation réussie
+        Ctrl->>Ctrl: Mettre à jour l'objet Moniteur
+        Ctrl->>Svc: validateUniqueness(moniteur)
+        Svc->>Rep: existsByCin(cin, id)
+        Rep->>DB: SELECT COUNT(*) FROM moniteur WHERE cin = ? AND id != ?
+        DB->>Rep: Résultat
+        Rep->>Svc: Résultat
+        Svc->>Rep: existsCinInCandidat(cin)
+        Rep->>DB: SELECT COUNT(*) FROM candidat WHERE cin = ?
+        DB->>Rep: Résultat
+        Rep->>Svc: Résultat
+        Svc->>Rep: existsByNumPermis(numPermis, id)
+        Rep->>DB: SELECT COUNT(*) FROM moniteur WHERE num_permis = ? AND id != ?
+        DB->>Rep: Résultat
+        Rep->>Svc: Résultat
+        Svc->>Ctrl: Liste d'erreurs
+        alt Pas d'erreurs d'unicité
+            Ctrl->>IHM: Afficher dialogue de confirmation
+            Utilisateur->>IHM: Confirmer modification
+            Ctrl->>Svc: saveMoniteur(moniteur)
+            Svc->>Svc: Vérifier âge (>= 21 ans)
+            Svc->>Rep: save(moniteur)
+            Rep->>DB: UPDATE moniteur SET ... WHERE id = ?
+            DB->>Rep: Nombre de lignes affectées
+            Rep->>Svc: Moniteur mis à jour
+            Svc->>Ctrl: Moniteur enregistré
+            Ctrl->>Audit: logAction("UPDATE", "MONITEUR", id, message)
+            Ctrl->>Ctrl: loadMoniteurs()
+            Ctrl->>Ctrl: disableForm(true)
+            Ctrl->>IHM: Afficher notification de succès
+        else Erreurs d'unicité
+            Ctrl->>IHM: Afficher erreurs d'unicité
+        end
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

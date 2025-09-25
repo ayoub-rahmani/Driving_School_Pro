@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as PaiementService
+    participant Rep as PaiementRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Sélectionner méthode de paiement
+    Utilisateur->>IHM: Sélectionner statut
+    Utilisateur->>IHM: Sélectionner candidat
+    Utilisateur->>IHM: Sélectionner dates début/fin
+    Utilisateur->>IHM: Cliquer sur "Appliquer"
+    IHM->>Ctrl: handleApplyFilter()
+    Ctrl->>Svc: getAllPaiements()
+    Svc->>Rep: getAll()
+    Rep->>DB: SELECT * FROM paiements
+    DB->>Rep: Liste de paiements
+    Rep->>Svc: Liste de paiements
+    Svc->>Ctrl: Liste de paiements
+    Ctrl->>Ctrl: Filtrer les paiements selon les critères
+    Ctrl->>IHM: Mettre à jour la table avec les résultats filtrés

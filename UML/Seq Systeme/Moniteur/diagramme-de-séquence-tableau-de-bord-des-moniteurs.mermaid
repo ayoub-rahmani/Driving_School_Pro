@@ -1,0 +1,26 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as MoniteurController
+    participant Svc as MoniteurService
+    participant Rep as MoniteurRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Cliquer sur "Tableau de Bord"
+    IHM->>Ctrl: toggleDashboard()
+    Ctrl->>Ctrl: refreshDashboard()
+    Ctrl->>Svc: getAllMoniteurs()
+    Svc->>Rep: findAll()
+    Rep->>DB: SELECT * FROM moniteur
+    DB->>Rep: Liste de moniteurs
+    Rep->>Svc: Liste de moniteurs
+    Svc->>Ctrl: Liste de moniteurs
+    Ctrl->>Ctrl: Calculer statistiques (total, disponibles, indisponibles)
+    Ctrl->>Ctrl: Calculer répartition par catégorie de permis
+    Ctrl->>Ctrl: Calculer répartition par expérience
+    Ctrl->>IHM: Mettre à jour totalMoniteursLabel
+    Ctrl->>IHM: Mettre à jour moniteursDisponiblesLabel
+    Ctrl->>IHM: Mettre à jour moniteursIndisponiblesLabel
+    Ctrl->>IHM: Mettre à jour categoriePermisChart
+    Ctrl->>IHM: Mettre à jour experienceChart
+    Ctrl->>IHM: Afficher notification de succès

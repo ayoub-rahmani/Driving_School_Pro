@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+
+<StackPane fx:id="videoContainer" styleClass="video-container"
+           xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.Controllers.LoginController">
+
+    <BorderPane fx:id="rootPane" prefHeight="700.0" prefWidth="1000.0"
+                styleClass="login-container"
+                stylesheets="@../Styles/Common.css,@../Styles/Login.css">
+
+        <center>
+            <VBox fx:id="loginForm" alignment="CENTER" spacing="20.0" styleClass="login-form">
+                <children>
+                    <!-- Logo -->
+                    <StackPane styleClass="logo-container">
+                        <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" styleClass="logo-image">
+                            <image>
+                                <Image url="@../images/2.jpg"/>
+                            </image>
+                        </ImageView>
+                    </StackPane>
+
+                    <!-- Title -->
+                    <Label styleClass="login-title" text="AUTO-ÉCOLE PRO">
+                        <font>
+                            <Font name="System Bold" size="28.0" />
+                        </font>
+                    </Label>
+
+                    <!-- Subtitle -->
+                    <Label styleClass="login-subtitle" text="Connectez-vous pour accéder au système">
+                        <font>
+                            <Font size="16.0" />
+                        </font>
+                    </Label>
+
+                    <!-- Error Message -->
+                    <Label fx:id="errorLabel" styleClass="error-label" text="" />
+
+                    <!-- Login Form -->
+                    <VBox spacing="20.0" styleClass="form-container">
+                        <!-- Username Field -->
+                        <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                            <SVGPath content="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                     styleClass="icon-user" />
+                            <TextField fx:id="usernameField" promptText="Nom d'utilisateur" styleClass="login-field" HBox.hgrow="ALWAYS" />
+                        </HBox>
+
+                        <!-- Password Field -->
+                        <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="input-container">
+                            <SVGPath content="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"
+                                     styleClass="icon-lock" />
+                            <PasswordField fx:id="passwordField" promptText="Mot de passe" styleClass="login-field" HBox.hgrow="ALWAYS" />
+                        </HBox>
+                        <CheckBox fx:id="rememberMeCheckbox" text="Remember me" selected="false" styleClass="remember" />
+                        <HBox alignment="CENTER_RIGHT" styleClass="forgot-password-container">
+                            <Hyperlink fx:id="forgotPasswordLink" text="Mot de passe oublié?"
+                                       onAction="#handleForgotPassword" styleClass="forgot-password-link" />
+                        </HBox>
+
+                        <!-- Login Button -->
+                        <HBox alignment="CENTER">
+                            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin"
+                                    styleClass="login-button" text="Se connecter"/>
+                        </HBox>
+                    </VBox>
+                </children>
+                <padding>
+                    <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                </padding>
+            </VBox>
+        </center>
+
+        <bottom>
+            <!-- Footer -->
+            <HBox alignment="CENTER" styleClass="login-footer">
+                <children>
+                    <Label text="© 2025 Auto-École Pro | Tous droits réservés" textFill="WHITE" />
+                </children>
+                <padding>
+                    <Insets bottom="10.0" top="10.0" />
+                </padding>
+            </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>
+

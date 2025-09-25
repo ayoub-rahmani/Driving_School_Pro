@@ -1,0 +1,306 @@
+/* Settings Container */
+.settings-container {
+    -fx-background-image: url("../images/3.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Header Section */
+.settings-header {
+    -fx-background-color: rgba(0, 0, 0, 0.75); /* Dark overlay */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+}
+
+.settings-title {
+    -fx-text-fill: #FFFFFF; /* White */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.icon-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter on hover */
+}
+
+/* User Profile Section */
+.profile-banner {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 8, 0, 0, 3); /* Lighter shadow */
+}
+
+.user-avatar {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2); /* Lighter shadow */
+}
+
+.user-fullname {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #343a40; /* Dark gray */
+}
+
+.current-value-label {
+    -fx-text-fill: #495057; /* Medium gray */
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+}
+
+.last-login-label {
+    -fx-text-fill: #6c757d;
+    -fx-font-size: 13px; /* Smaller font for less important info */
+    -fx-font-style: italic;
+}
+
+.user-info-container {
+    -fx-background-color: #F8F9FA; /* Very light gray */
+    -fx-background-radius: 20;
+    -fx-padding: 5 10 5 10;
+}
+
+.user-role-label {
+    -fx-text-fill: #007BFF; /* Strong blue */
+    -fx-font-weight: bold;
+}
+
+/* Settings Scroll Pane */
+.settings-scroll-pane {
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+.settings-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.settings-scroll-pane > .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 5;
+}
+
+.settings-scroll-pane > .scroll-bar:vertical > .thumb {
+    -fx-background-color: #007BFF; /* Strong blue */
+    -fx-background-radius: 5;
+}
+
+/* TitledPane Customization */
+.settings-titled-pane {
+    -fx-animated: true;
+    -fx-border-width: 0;
+    -fx-background-color: transparent; /* Make pane background transparent */
+}
+
+.settings-titled-pane > .title {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-border-color: #DEE2E6; /* Very light gray */
+    -fx-border-width: 1;
+    -fx-border-radius: 10; /* Reduced border radius */
+    -fx-background-radius: 10; /* Consistent background radius */
+    -fx-font-weight: bold;
+    -fx-padding: 10px; /* Reduced padding */
+    -fx-text-fill: #495057;
+}
+
+.settings-titled-pane:expanded > .title {
+    /* Light blue when expanded */
+    -fx-background-color: #E9ECEF;
+    -fx-border-color: #007BFF; /* Strong blue */
+    -fx-border-width: 1;
+    -fx-text-fill: #007BFF; /* Set title text color to blue */
+}
+
+.settings-titled-pane > .title:hover {
+    -fx-background-color: #f8f9fa; /* Add a subtle background on hover */
+    -fx-border-color: -fx-primary; /* Add border color */
+}
+
+.settings-titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: #007BFF; /* Strong blue */
+}
+
+/* Apply white fill to SVG when expanded */
+.settings-titled-pane:expanded > .title > .graphic > .svg-path {
+    -fx-fill: white;
+}
+
+.settings-titled-pane > .content {
+    -fx-border-color: #DEE2E6; /* Very light gray */
+    -fx-border-width: 0 1 1 1;
+    -fx-border-radius: 0 0 10 10;
+    -fx-background-radius: 0 0 10 10;
+    -fx-background-color: #FFFFFF; /* White */
+}
+
+/* Form Controls - update focus and hover effects */
+.text-field,
+.password-field,
+.settings-field,
+.combo-box {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-border-color: #DEE2E6; /* Very light gray */
+    -fx-border-radius: 5;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-transition: border-color 0.2s ease-in-out, border-width 0.2s ease-in-out;
+}
+
+.text-field:focused,
+.password-field:focused,
+.settings-field:focused,
+.combo-box:focused {
+    -fx-border-color: #007BFF; /* Strong blue */
+    -fx-border-width: 2;
+}
+
+.text-field:hover,
+.password-field:hover,
+.settings-field:hover,
+.combo-box:hover{
+    -fx-border-color: #007BFF; /* Strong blue */
+}
+
+/* Label hover effects */
+.settings-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #495057; /* Dark gray */
+    -fx-transition: -fx-text-fill 0.2s ease-in-out;
+}
+
+.settings-label:hover {
+    -fx-text-fill: #007BFF; /* Strong blue */
+}
+
+/* About Section */
+.about-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #343A40; /* Dark gray */
+}
+
+.about-version {
+    -fx-text-fill: #777777; /* Medium gray */
+    -fx-font-size: 14px;
+}
+
+.about-copyright {
+    -fx-text-fill: #777777; /* Medium gray */
+    -fx-font-size: 14px;
+}
+
+.about-link {
+    -fx-text-fill: #007BFF; /* Strong blue */
+    -fx-underline: true;
+    -fx-font-size: 14px;
+}
+
+.about-link:hover {
+    -fx-text-fill: #0056b3; /* Darker blue */
+}
+
+/* Buttons */
+.save-button {
+    -fx-background-color: #007BFF; /* Strong blue */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 15;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 2, 2); /* Subtle shadow */
+}
+
+.save-button:hover {
+    -fx-background-color: #0056b3; /* Darker blue */
+}
+
+.logout-button {
+    -fx-background-color: #DC3545; /* Strong red */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: #C82333; /* Darker red */
+}
+
+.close-button {
+    -fx-background-color: #6C757D; /* Medium gray */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.close-button:hover {
+    -fx-background-color: #5A6268; /* Darker gray */
+}
+
+/* Footer */
+.settings-footer {
+    -fx-background-color: rgba(0,0,0,0.1); /* White */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, -5); /* Lighter shadow */
+    -fx-padding: 15 20;
+}
+
+/* Message Labels */
+.error-label {
+    -fx-text-fill: #DC3545; /* Strong red */
+    -fx-font-weight: bold;
+    -fx-min-height: 20px;
+    -fx-padding: 5 0 0 0;
+}
+
+.success-label {
+    -fx-text-fill: #28A745; /* Strong green */
+    -fx-font-weight: bold;
+    -fx-min-height: 20px;
+    -fx-padding: 5 0 0 0;
+}
+/* TitledPane Customization */
+.settings-titled-pane {
+    -fx-animated: true;
+    -fx-border-width: 0;
+    -fx-background-color: transparent; /* Make pane background transparent */
+}
+
+.settings-titled-pane > .title {
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-border-color: #DEE2E6; /* Very light gray */
+    -fx-border-width: 1;
+    -fx-border-radius: 10; /* Reduced border radius */
+    -fx-background-radius: 10; /* Consistent background radius */
+    -fx-font-weight: bold;
+    -fx-padding: 10px; /* Reduced padding */
+}
+.settings-titled-pane:hover{
+    -fx-background-color: transparent;
+}
+
+.settings-titled-pane:expanded > .title {
+    /* Light blue when expanded */
+    -fx-background-color: #120165; /* Light Blue */
+    -fx-border-color: #007BFF; /* Strong blue */
+    -fx-border-width: 1;
+    -fx-text-fill: white; /* Set title text color to white */
+}
+
+.settings-titled-pane > .title:hover {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2;/* Add border color */
+}
+
+.settings-titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: #007BFF; /* Strong blue */
+}
+
+/* Apply white fill to SVG when expanded */
+.settings-titled-pane:expanded > .title > .graphic > .svg-path {
+    -fx-fill: white;
+}

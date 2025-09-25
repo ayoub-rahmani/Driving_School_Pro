@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as PaiementService
+    participant Rep as PaiementRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Saisir terme de recherche
+    Utilisateur->>IHM: Cliquer sur "Rechercher"
+    IHM->>Ctrl: handleRecherche()
+    Ctrl->>Ctrl: recherchePaiements()
+    Ctrl->>Svc: getAllPaiements()
+    Svc->>Rep: getAll()
+    Rep->>DB: SELECT * FROM paiements
+    DB->>Rep: Liste de paiements
+    Rep->>Svc: Liste de paiements
+    Svc->>Ctrl: Liste de paiements
+    Ctrl->>Ctrl: Filtrer les paiements selon le terme de recherche
+    Ctrl->>IHM: Mettre à jour la table avec les résultats filtrés

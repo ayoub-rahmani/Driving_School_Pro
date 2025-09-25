@@ -1,0 +1,73 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as DepenseService
+    participant Rep as DepenseRep
+    participant RepVehicule as VehiculeRep
+    participant RepMoniteur as MoniteurRep
+    participant RepReparation as ReparationRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Cliquer sur "Ajouter"
+    IHM->>Ctrl: handleAjouter()
+    Ctrl->>Ctrl: clearForm()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Afficher formulaire vide
+    Utilisateur->>IHM: Sélectionner catégorie (MONITEUR, VEHICULE, AUTRES)
+    IHM->>Ctrl: categorieComboBox.valueProperty().listener
+    Ctrl->>Ctrl: updateDepenseFormByCategory(categorie)
+    Ctrl->>IHM: Afficher les champs spécifiques à la catégorie
+    
+    alt Catégorie = VEHICULE
+        Utilisateur->>IHM: Sélectionner véhicule
+        Utilisateur->>IHM: Sélectionner type (DOCUMENTS, REPARATION)
+        alt Type = REPARATION
+            IHM->>Ctrl: typeVehiculeDepenseComboBox.valueProperty().listener
+            Ctrl->>Ctrl: loadReparationsForVehicule(vehiculeId)
+            Ctrl->>Svc: reparationService.getReparationsByVehiculeId(vehiculeId)
+            Svc->>RepReparation: getByVehiculeId(vehiculeId)
+            RepReparation->>DB: SELECT * FROM reparations WHERE vehicule_id = ? AND paye = false
+            DB->>RepReparation: Liste des réparations non payées
+            RepReparation->>Svc: Liste des réparations non payées
+            Svc->>Ctrl: Liste des réparations non payées
+            Ctrl->>IHM: Remplir reparationComboBox
+            Utilisateur->>IHM: Sélectionner réparation
+            IHM->>Ctrl: reparationComboBox.valueProperty().listener
+            Ctrl->>IHM: Mettre à jour montant avec coût de réparation
+        end
+    end
+    
+    Utilisateur->>IHM: Remplir montant, date, description
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: saveDepense()
+    Ctrl->>Ctrl: Valider le formulaire
+    
+    alt Validation réussie
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer enregistrement
+        Ctrl->>Ctrl: Créer objet Depense
+        
+        alt Catégorie = REPARATION
+            Ctrl->>Svc: reparationService.updateReparation(reparation)
+            Svc->>RepReparation: update(reparation)
+            RepReparation->>DB: UPDATE reparations SET paye = true WHERE id = ?
+            DB->>RepReparation: Nombre de lignes affectées
+        end
+        
+        Ctrl->>Svc: saveDepense(depense)
+        Svc->>Rep: save(depense)
+        Rep->>DB: INSERT INTO depenses
+        DB->>Rep: ID généré
+        Rep->>Svc: Dépense avec ID
+        Svc->>Ctrl: Dépense enregistrée
+        Ctrl->>Audit: logAction("CREATE", "DEPENSE", id, message)
+        Ctrl->>Ctrl: loadDepenses()
+        Ctrl->>Ctrl: clearForm()
+        Ctrl->>Ctrl: disableForm(true)
+        Ctrl->>IHM: Afficher notification de succès
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

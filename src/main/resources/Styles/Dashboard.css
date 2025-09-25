@@ -1,0 +1,495 @@
+/* Enhanced Dashboard Styles - Fixed Version */
+
+/* Main container */
+.dashboard-container {
+    -fx-background-image: url("../images/1.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+.dashboard-content {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 18, 0, 0, 0);
+    -fx-border-color: rgba(204, 204, 204, 0.5);
+    -fx-border-width: 1.5;
+    -fx-border-radius: 24;
+    -fx-padding: 28;
+}
+
+/* Dashboard header with enhanced styling */
+.dashboard-header {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 22;
+    -fx-padding: 26;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 10, 0, 0, 0);
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 22;
+    -fx-border-width: 1.5;
+}
+
+/* Dashboard icon container with improved visual */
+.dashboard-icon {
+    -fx-background-color: #bc0c0c;
+    -fx-background-radius: 50%;
+    -fx-min-width: 56px;
+    -fx-min-height: 56px;
+    -fx-max-width: 56px;
+    -fx-max-height: 56px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(188, 12, 12, 0.4), 8, 0, 0, 0);
+}
+
+/* Date and timeframe labels */
+.date-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #555555;
+}
+
+.timeframe-badge {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 14;
+    -fx-padding: 5 10;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #555555;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+}
+
+/* Enhanced stat cards */
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 18;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 18;
+    -fx-border-width: 1.5;
+    -fx-padding: 22;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 6, 0, 0, 0);
+}
+
+.stat-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #d0d0d0;
+}
+
+.stat-icon-container {
+    -fx-background-color: rgba(188, 12, 12, 0.1);
+    -fx-background-radius: 50%;
+    -fx-min-width: 45px;
+    -fx-min-height: 45px;
+    -fx-max-width: 45px;
+    -fx-max-height: 45px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 0);
+    -fx-margin-bottom: 12;
+}
+
+.stat-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #444444;
+    -fx-padding: 5 0 2 0;
+}
+
+.stat-value {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #bc0c0c;
+    -fx-padding: 5 0;
+}
+
+.stat-details {
+    -fx-spacing: 6;
+    -fx-alignment: center;
+}
+
+.stat-detail {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+}
+
+.stat-separator {
+    -fx-font-size: 12px;
+    -fx-text-fill: #999999;
+    -fx-padding: 0 6;
+}
+
+/* Chart containers with more refined styling */
+.chart-container {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 18;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 18;
+    -fx-border-width: 1.5;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 6, 0, 0, 0);
+}
+
+.chart-title {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #bc0c0c;
+    -fx-padding: 0 0 12 0;
+}
+
+/* Enhanced chart styling */
+.chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: #777777;
+    -fx-stroke-width: 2px;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 12px;
+}
+
+.chart-legend-item {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+
+.chart-legend-item-symbol {
+    -fx-background-radius: 5px;
+    -fx-padding: 6px;
+}
+
+.chart-bar {
+    -fx-bar-fill: #bc0c0c;
+    -fx-background-radius: 6px 6px 0 0;
+    -fx-background-position: center center;
+}
+
+.axis {
+    -fx-font-size: 14px;
+    -fx-tick-label-fill: #333333;
+    -fx-font-family: "System";
+    -fx-font-weight: 600;
+}
+
+.axis-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.chart-plot-background {
+    -fx-background-color: #fdfdfd;
+    -fx-background-radius: 6;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: #eeeeee;
+    -fx-stroke-width: 1px;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #eeeeee;
+    -fx-stroke-width: 1px;
+}
+
+/* Improved tabs styling */
+.dashboard-tabs .tab-header-area .tab-header-background {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 2 0;
+}
+
+.dashboard-tabs .tab {
+    -fx-background-color: transparent;
+    -fx-padding: 14 22;
+}
+
+
+.dashboard-tabs .tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: #bc0c0c;
+    -fx-border-width: 0 0 4 0;
+}
+
+.dashboard-tabs .tab .tab-label {
+    -fx-text-fill: #666666;
+    -fx-font-weight: 600;
+    -fx-font-size: 14px;
+}
+
+.dashboard-tabs .tab:selected .tab-label {
+    -fx-text-fill: #bc0c0c;
+    -fx-font-weight: bold;
+}
+
+/* Progress bars with improved styling */
+.progress-bar > .track {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.05), 3, 0, 0, 0);
+}
+
+.progress-bar > .bar {
+    -fx-background-radius: 8;
+    -fx-background-insets: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 3, 0, 0, 0);
+}
+
+.revenue-progress .bar {
+    -fx-background-color: #10b981;
+}
+
+.expenses-progress .bar {
+    -fx-background-color: #ef4444;
+}
+
+.candidats-progress .bar,
+.moniteurs-progress .bar,
+.vehicules-progress .bar {
+    -fx-background-color: #bc0c0c;
+}
+
+.category-progress .bar,
+.performance-progress .bar {
+    -fx-background-color: #3b82f6;
+}
+
+/* Finance section with improved design */
+.finance-icon-container {
+    -fx-min-width: 34px;
+    -fx-min-height: 34px;
+    -fx-max-width: 34px;
+    -fx-max-height: 34px;
+    -fx-alignment: center;
+    -fx-background-color: rgba(188, 12, 12, 0.1);
+    -fx-background-radius: 50%;
+    -fx-padding: 5;
+}
+
+.finance-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.finance-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.finance-detail {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+}
+
+/* Alert items, exam items, and payment items */
+.alerts-list,
+.upcoming-list,
+.payments-list {
+    -fx-spacing: 12;
+}
+
+.alert-item,
+.exam-item,
+.payment-item {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-color: #e5e5e5;
+    -fx-border-radius: 10;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 4, 0, 0, 0);
+}
+
+.alert-item:hover,
+.exam-item:hover,
+.payment-item:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 6, 0, 0, 0);
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+    -fx-background-color: #f9f9f9;
+}
+
+.alert-high {
+    -fx-border-color: #ef4444;
+    -fx-border-width: 0 0 0 5;
+}
+
+.alert-medium {
+    -fx-border-color: #f59e0b;
+    -fx-border-width: 0 0 0 5;
+}
+
+.alert-icon-container,
+.exam-icon-container,
+.payment-icon-container {
+    -fx-min-width: 34px;
+    -fx-min-height: 34px;
+    -fx-max-width: 34px;
+    -fx-max-height: 34px;
+    -fx-alignment: center;
+    -fx-background-color: rgba(188, 12, 12, 0.1);
+    -fx-background-radius: 50%;
+    -fx-padding: 5;
+}
+
+.alert-title,
+.exam-title,
+.payment-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.alert-details,
+.exam-details,
+.payment-details {
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+}
+
+.alert-badge,
+.exam-badge {
+    -fx-background-radius: 6;
+    -fx-padding: 3 10;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.badge-high {
+    -fx-background-color: #ef4444;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(239, 68, 68, 0.3), 3, 0, 0, 0);
+}
+
+.badge-medium {
+    -fx-background-color: #f59e0b;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(245, 158, 11, 0.3), 3, 0, 0, 0);
+}
+
+.badge-code {
+    -fx-background-color: #3b82f6;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(59, 130, 246, 0.3), 3, 0, 0, 0);
+}
+
+.badge-conduite {
+    -fx-background-color: #bc0c0c;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(188, 12, 12, 0.3), 3, 0, 0, 0);
+}
+
+/* Payment items */
+.payment-amount {
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.payment-status {
+    -fx-background-radius: 6;
+    -fx-padding: 3 10;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.status-paid {
+    -fx-background-color: #10b981;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.3), 3, 0, 0, 0);
+}
+
+.status-pending {
+    -fx-background-color: #f59e0b;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(245, 158, 11, 0.3), 3, 0, 0, 0);
+}
+
+/* No data label */
+.no-data-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: #666666;
+    -fx-font-style: italic;
+    -fx-alignment: center;
+    -fx-padding: 24;
+}
+
+/* Progress labels */
+.progress-label,
+.performance-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.progress-value,
+.performance-value {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Progress container */
+.progress-container,
+.performance-container {
+    -fx-spacing: 16;
+    -fx-padding: 5;
+}
+
+/* Scroll pane styling */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+}
+
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-height: 12;
+}
+
+.scroll-bar > .thumb {
+    -fx-background-color: #cccccc;
+    -fx-background-radius: 6;
+}
+
+.scroll-bar > .thumb:hover {
+    -fx-background-color: #bbbbbb;
+}
+
+.scroll-bar > .thumb:pressed {
+    -fx-background-color: #aaaaaa;
+}
+
+.scroll-bar > .track {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 5;
+}
+
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: #cccccc;
+}

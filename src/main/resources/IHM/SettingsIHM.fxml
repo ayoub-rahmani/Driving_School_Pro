@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.effect.*?>
+
+<BorderPane fx:id="rootPane" prefHeight="700.0" prefWidth="900.0"
+            styleClass="settings-container"
+            stylesheets="@../Styles/Common.css,@../Styles/Settings.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.SettingsController">
+
+    <top>
+        <!-- Header Section -->
+        <VBox spacing="0">
+            <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="settings-header">
+                <children>
+                    <!-- Back Button -->
+                    <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleClose"
+                            styleClass="icon-button">
+                        <tooltip>
+                            <Tooltip text="Retour"/>
+                        </tooltip>
+                        <graphic>
+                            <SVGPath content="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                                     fill="white" scaleX="1.2" scaleY="1.2"/>
+                        </graphic>
+                    </Button>
+
+                    <Label styleClass="settings-title" text="Paramètres du système">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+
+                    <Region HBox.hgrow="ALWAYS" />
+
+                    <!-- User Info Display -->
+                    <HBox alignment="CENTER" spacing="10.0" styleClass="user-info-container">
+                        <Label fx:id="userRoleLabel" styleClass="user-role-label" text="Administrateur" />
+                        <SVGPath content="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                 fill="#007BFF" scaleX="1.2" scaleY="1.2"/>
+                    </HBox>
+                </children>
+                <padding>
+                    <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+                </padding>
+            </HBox>
+
+            <!-- User Profile Banner -->
+            <HBox styleClass="profile-banner" alignment="CENTER_LEFT" spacing="20.0">
+                <ImageView fx:id="userAvatarView" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" styleClass="user-avatar">
+                    <Image url="@../images/profille.jpg" />
+                    <effect>
+                        <javafx.scene.effect.DropShadow radius="5.0" color="#00000033" />
+                    </effect>
+                </ImageView>
+
+                <VBox spacing="5.0">
+                    <Label fx:id="userFullNameLabel" styleClass="user-fullname" text="Nom Complet" />
+                    <Label fx:id="currentUsernameDisplay" styleClass="current-value-label" text="username" />
+                    <Label fx:id="lastLoginLabel" styleClass="last-login-label" text="Dernière connexion: Aujourd'hui à 10:30" />
+                </VBox>
+
+                <padding>
+                    <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
+                </padding>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <!-- Scrollable Content Area -->
+        <ScrollPane fitToWidth="true" styleClass="settings-scroll-pane" BorderPane.alignment="CENTER">
+            <content>
+                <VBox spacing="20.0" styleClass="settings-content">
+                    <children>
+
+                        <!-- Username Change Section -->
+                        <TitledPane animated="true" text="Modifier le nom d'utilisateur" expanded="false" styleClass="settings-titled-pane">
+                            <graphic>
+                                <SVGPath content="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                         fill="#007BFF" scaleX="0.8" scaleY="0.8"/>
+                            </graphic>
+                            <content>
+                                <VBox spacing="15.0" styleClass="form-container">
+                                    <Label text="Nom d'utilisateur actuel:" styleClass="settings-label" />
+                                    <Label fx:id="currentUsernameLabel" styleClass="current-value-label" />
+
+                                    <Label text="Nouveau nom d'utilisateur:" styleClass="settings-label" />
+                                    <TextField fx:id="newUsernameField" promptText="Entrez un nouveau nom d'utilisateur" styleClass="settings-field" />
+
+                                    <Label text="Mot de passe (pour confirmation):" styleClass="settings-label" />
+                                    <PasswordField fx:id="passwordForUsernameField" promptText="Entrez votre mot de passe actuel" styleClass="settings-field" />
+
+                                    <Label fx:id="usernameErrorLabel" styleClass="error-label"  managed="false" visible="false"/>
+                                    <Label fx:id="usernameSuccessLabel" styleClass="success-label" managed="false" visible="false"/>
+
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <Button fx:id="saveUsernameBtn" mnemonicParsing="false" onAction="#handleSaveUsername"
+                                                styleClass="save-button" text="Enregistrer">
+                                            <graphic>
+                                                <SVGPath content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                         fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+
+                        <!-- Password Change Section -->
+                        <TitledPane animated="true" text="Modifier le mot de passe" expanded="false" styleClass="settings-titled-pane">
+                            <graphic>
+                                <SVGPath content="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z"
+                                         fill="#007BFF" scaleX="0.8" scaleY="0.8"/>
+                            </graphic>
+                            <content>
+                                <VBox spacing="15.0" styleClass="form-container">
+                                    <Label text="Mot de passe actuel:" styleClass="settings-label" />
+                                    <PasswordField fx:id="currentPasswordField" promptText="Entrez votre mot de passe actuel"  styleClass="settings-field"/>
+
+                                    <Label text="Nouveau mot de passe:" styleClass="settings-label" />
+                                    <PasswordField fx:id="newPasswordField" promptText="Entrez un nouveau mot de passe"  styleClass="settings-field"/>
+
+                                    <Label text="Confirmer le nouveau mot de passe:" styleClass="settings-label" />
+                                    <PasswordField fx:id="confirmPasswordField" promptText="Confirmez le nouveau mot de passe" styleClass="settings-field" />
+
+                                    <Label fx:id="passwordErrorLabel" styleClass="error-label" managed="false" visible="false"/>
+                                    <Label fx:id="passwordSuccessLabel" styleClass="success-label" managed="false" visible="false"/>
+
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <Button fx:id="savePasswordBtn" mnemonicParsing="false" onAction="#handleSavePassword"
+                                                styleClass="save-button" text="Enregistrer">
+                                            <graphic>
+                                                <SVGPath content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                         fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+
+                        <!-- Email Settings -->
+                        <TitledPane animated="true" text="Modifier l'adresse email" expanded="false" styleClass="settings-titled-pane">
+                            <graphic>
+                                <SVGPath content="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                                         fill="#007BFF" scaleX="0.8" scaleY="0.8"/>
+                            </graphic>
+                            <content>
+                                <VBox spacing="15.0" styleClass="form-container">
+
+                                    <Label text="Nouvelle adresse email" styleClass="settings-label" />
+                                    <TextField fx:id="emailField" promptText="Nouvelle adresse email" styleClass="settings-field" HBox.hgrow="ALWAYS"  />
+
+                                    <Label text="Mot de passe actuel" styleClass="settings-label" />
+                                    <PasswordField fx:id="passwordForEmailField" promptText="Mot de passe actuel" styleClass="settings-field" HBox.hgrow="ALWAYS" />
+
+                                    <Label fx:id="emailErrorLabel" styleClass="error-label"  managed="false" visible="false"/>
+                                    <Label fx:id="emailSuccessLabel" styleClass="success-label" managed="false" visible="false"/>
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <Button fx:id="saveEmailBtn" mnemonicParsing="false" onAction="#handleSaveEmail"
+                                                styleClass="save-button" text="Enregistrer">
+                                            <graphic>
+                                                <SVGPath content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                         fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+
+                        <!-- Phone Number Settings -->
+                        <TitledPane animated="true" text="Modifier le numéro de téléphone WhatsApp" styleClass="settings-titled-pane" expanded="false">
+                            <graphic>
+                                <SVGPath content="M17,19H7V5H17M17,1H7C5.89,1 5,1.89 5,3V21A2,2 0 0,0 7,23H17A2,2 0 0,0 19,21V3C19,1.89 18.1,1 17,1Z"
+                                         fill="#007BFF" scaleX="0.8" scaleY="0.8"/>
+                            </graphic>
+                            <content>
+                                <VBox spacing="15.0" styleClass="form-container">
+                                    <Label text="Nouveau numéro de téléphone" styleClass="settings-label" />
+                                    <TextField fx:id="phoneNumberField" promptText="Nouveau numéro de téléphone" styleClass="settings-field" HBox.hgrow="ALWAYS" />
+                                    <Label text="Mot de passe actuel" styleClass="settings-label" />
+                                    <PasswordField fx:id="passwordForPhoneField" promptText="Mot de passe actuel" styleClass="settings-field" HBox.hgrow="ALWAYS" />
+
+                                    <Label fx:id="phoneErrorLabel" styleClass="error-label"  managed="false" visible="false"/>
+                                    <Label fx:id="phoneSuccessLabel" styleClass="success-label" managed="false" visible="false"/>
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <Button fx:id="savePhoneBtn" mnemonicParsing="false" onAction="#handleSavePhoneNumber"
+                                                styleClass="save-button" text="Enregistrer">
+                                            <graphic>
+                                                <SVGPath content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                         fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+
+                        <!-- About Section -->
+                        <TitledPane animated="true" text="À propos" expanded="false" styleClass="settings-titled-pane">
+                            <graphic>
+                                <SVGPath content="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                         fill="#007BFF" scaleX="0.8" scaleY="0.8"/>
+                            </graphic>
+                            <content>
+                                <VBox spacing="15.0" styleClass="settings-section">
+                                    <HBox alignment="CENTER" styleClass="logo-container">
+                                        <ImageView fx:id="aboutLogoImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                            <Image url="@../images/2.jpg" />
+                                            <effect>
+                                                <javafx.scene.effect.DropShadow radius="5.0" color="#00000033" />
+                                            </effect>
+                                        </ImageView>
+                                    </HBox>
+
+                                    <Label fx:id="aboutTitleLabel" text="Auto-École Pro" styleClass="about-title">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <Label text="Version 1.3.5" styleClass="about-version" />
+                                    <Label text="© 2025 Tous droits réservés" styleClass="about-copyright" />
+
+                                    <!--<VBox spacing="5.0" styleClass="about-links">
+                                        <Hyperlink text="Consulter la documentation" styleClass="about-link"/>
+                                        <Hyperlink text="Signaler un problème" styleClass="about-link" />
+                                        <Hyperlink text="Vérifier les mises à jour" styleClass="about-link" />
+                                    </VBox>-->
+
+                                    <VBox spacing="5.0" styleClass="system-info">
+                                        <Label text="Informations système" styleClass="section-subtitle" />
+                                        <Label text="Java: Version 1.8.0_301" />
+                                        <Label text="JavaFX: Version 8.0.301" />
+                                        <Label text="OS: Windows 10" />
+                                    </VBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane fx:id="backupManagementPane" animated="true" text="Gestion des sauvegardes" expanded="false" styleClass="settings-titled-pane">
+                            <graphic>
+                                <SVGPath content="M19.35,10.04C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.04C2.34,8.36 0,10.91 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.04M19,18H6A4,4 0 0,1 2,14C2,11.95 3.53,10.24 5.56,10.03L6.63,9.92L7.13,8.97C8.08,7.14 9.94,6 12,6C14.62,6 16.88,7.86 17.39,10.43L17.69,11.93L19.22,12.04C20.78,12.14 22,13.45 22,15A3,3 0 0,1 19,18M8,13H10.55V16H13.45V13H16L12,9L8,13Z"
+                                         fill="#007BFF" scaleX="0.8" scaleY="0.8"/>
+                            </graphic>
+                            <content>
+                                <VBox spacing="15.0" styleClass="form-container">
+                                    <Label text="Gérez les sauvegardes de la base de données" styleClass="settings-label" />
+                                    <Label text="En tant qu&apos;administrateur, vous pouvez créer, restaurer et gérer les sauvegardes de la base de données."
+                                           styleClass="settings-description" wrapText="true" />
+
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                        <Label text="Sauvegardes automatiques:" styleClass="settings-label" />
+                                        <Label text="Activées (quotidiennes)" styleClass="current-value-label" />
+                                    </HBox>
+
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <Button fx:id="manageBackupsBtn" mnemonicParsing="false" onAction="#handleBackupManagement"
+                                                styleClass="primary-button" text="Gérer les sauvegardes">
+                                            <graphic>
+                                                <SVGPath content="M19.35,10.04C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.04C2.34,8.36 0,10.91 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.04M19,18H6A4,4 0 0,1 2,14C2,11.95 3.53,10.24 5.56,10.03L6.63,9.92L7.13,8.97C8.08,7.14 9.94,6 12,6C14.62,6 16.88,7.86 17.39,10.43L17.69,11.93L19.22,12.04C20.78,12.14 22,13.45 22,15A3,3 0 0,1 19,18M8,13H10.55V16H13.45V13H16L12,9L8,13Z"
+                                                         fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <!-- Footer with Logout Button -->
+        <HBox alignment="CENTER" spacing="20.0" styleClass="settings-footer">
+            <children>
+                <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogout"
+                        styleClass="logout-button" text="Déconnexion">
+                    <graphic>
+                        <SVGPath content="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"
+                                 fill="white"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#handleClose"
+                        styleClass="close-button" text="Fermer">
+                    <graphic>
+                        <SVGPath content="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                 fill="white"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>

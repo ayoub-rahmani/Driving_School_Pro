@@ -1,0 +1,31 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as ExamenController
+    participant Svc as ExamenService
+    participant Rep as ExamenRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Sélectionner type "Conduite"
+    Utilisateur->>IHM: Sélectionner candidat
+    Utilisateur->>IHM: Remplir formulaire
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: validateForm()
+    alt Validation réussie
+        Ctrl->>Ctrl: hasCodeExamen(candidatId, dateExamen)
+        Ctrl->>Svc: getAllExamens()
+        Svc->>Rep: findAll()
+        Rep->>DB: SELECT * FROM examen
+        DB->>Rep: Liste d'examens
+        Rep->>Svc: Liste d'examens
+        Svc->>Ctrl: Liste d'examens
+        Ctrl->>Ctrl: Filtrer examens par candidat et type "Code" validé
+        alt Pas d'examen de code validé
+            Ctrl->>IHM: Afficher message d'erreur
+        else Examen de code validé
+            Ctrl->>Ctrl: Continuer l'enregistrement
+        end
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

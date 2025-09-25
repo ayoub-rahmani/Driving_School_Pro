@@ -1,0 +1,40 @@
+/* Notification Styles */
+.notification-box {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+    -fx-max-width: 300;
+}
+
+.notification-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0d9488;
+}
+
+.notification-message {
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+    -fx-wrap-text: true;
+}
+
+.notification-close-button {
+    -fx-background-color: #0d9488;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 5 10 5 10;
+    -fx-cursor: hand;
+}
+
+.notification-close-button:hover {
+    -fx-background-color: #0f766e;
+}
+
+/* Success message style */
+.success-label {
+    -fx-text-fill: #10b981;
+    -fx-font-size: 12px;
+    -fx-min-height: 20px;
+    -fx-padding: 5 0 0 0;
+}

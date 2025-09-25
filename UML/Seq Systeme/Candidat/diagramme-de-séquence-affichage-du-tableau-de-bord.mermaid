@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as CandidatController
+    participant Svc as CandidatService
+    participant Rep as CandidatRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Cliquer sur "Tableau de Bord"
+    IHM->>Ctrl: toggleDashboard()
+    Ctrl->>Ctrl: refreshDashboard()
+    Ctrl->>Svc: getAllCandidats()
+    Svc->>Rep: findAll()
+    Rep->>DB: SELECT * FROM candidat
+    DB->>Rep: Liste de candidats
+    Rep->>Svc: Liste de candidats
+    Svc->>Ctrl: Liste de candidats
+    Ctrl->>Ctrl: Calculer statistiques
+    Ctrl->>IHM: Mettre à jour totalCandidatsLabel
+    Ctrl->>IHM: Mettre à jour candidatsActifsLabel
+    Ctrl->>IHM: Mettre à jour candidatsInactifsLabel
+    Ctrl->>IHM: Mettre à jour categoriePermisChart
+    Ctrl->>IHM: Mettre à jour inscriptionsParMoisChart
+    Ctrl->>IHM: Afficher notification de succès

@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<BorderPane prefHeight="800.0" prefWidth="1400.0"
+            styleClass="reparation-container"
+            stylesheets="@../Styles/Common.css,@../Styles/Reparation.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.ReparationController">
+    <!-- Header section -->
+    <top>
+        <!-- Header Section -->
+        <HBox alignment="CENTER" spacing="20.0" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Back Button -->
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Retour à la gestion des véhicules"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo and Title -->
+                <StackPane styleClass="logo-container">
+                    <SVGPath
+                            content="M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3"
+                            fill="#bc0c0c" scaleX="1.5" scaleY="1.5"/>
+                </StackPane>
+                <Label styleClass="header-label" text="GESTION DES RÉPARATIONS"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Export Button -->
+                <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#handleExport"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Exporter les données"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath
+                                content="M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z"
+                                fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.35" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <!-- Left Panel with Search, Table, and Actions -->
+            <VBox prefWidth="400.0" spacing="20.0" styleClass="reparation-table-container">
+                <children>
+                    <!-- Vehicle Info -->
+                    <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="vehicle-info-box">
+                        <Label text="Véhicule:" styleClass="section-label"/>
+                        <Label fx:id="vehiculeInfoLabel" text="Chargement..." styleClass="vehicle-name-label"/>
+                    </HBox>
+
+                    <!-- Search Bar -->
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <children>
+                            <TextField fx:id="rechercheField" promptText="Rechercher par description ou prestataire... "
+                                       HBox.hgrow="ALWAYS" styleClass="search-box" onKeyReleased="#handleRecherche"/>
+                            <Button fx:id="rechercheBtn" mnemonicParsing="false" onAction="#handleRecherche"
+                                    styleClass="icon-button">
+                                <tooltip>
+                                    <Tooltip text="Rechercher"/>
+                                </tooltip>
+                                <graphic>
+                                    <SVGPath
+                                            content="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                                            fill="#bc0c0c"/>
+                                </graphic>
+                            </Button>
+                        </children>
+                    </HBox>
+
+                    <!-- Filters TitledPane -->
+                    <TitledPane animated="true" text="Filtres" expanded="false">
+                        <content>
+                            <VBox spacing="15" styleClass="filter-section">
+                                <children>
+                                    <!-- Prestataire Filter -->
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                        <children>
+                                            <Label text="Prestataire:" styleClass="filter-label"/>
+                                            <ComboBox fx:id="prestataireFilter" prefWidth="200.0"
+                                                      promptText="Tous les prestataires"/>
+                                        </children>
+                                    </HBox>
+
+                                    <!-- Date Range Filter -->
+                                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                        <children>
+                                            <Label text="Période:" styleClass="filter-label"/>
+                                            <DatePicker fx:id="dateDebutFilter" promptText="Date début"/>
+                                            <Label text="à"/>
+                                            <DatePicker fx:id="dateFinFilter" promptText="Date fin"/>
+                                        </children>
+                                    </HBox>
+
+                                    <!-- Apply and Reset Buttons -->
+                                    <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                        <children>
+                                            <Button fx:id="resetFilterBtn" mnemonicParsing="false"
+                                                    onAction="#handleResetFilter"
+                                                    styleClass="button-secondary" text="Réinitialiser">
+                                                <tooltip>
+                                                    <Tooltip text="Réinitialiser tous les filtres"/>
+                                                </tooltip>
+                                                <graphic>
+                                                    <SVGPath
+                                                            content="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
+                                                            fill="white"/>
+                                                </graphic>
+                                            </Button>
+                                            <Button fx:id="applyFilterBtn" mnemonicParsing="false"
+                                                    onAction="#handleApplyFilter"
+                                                    styleClass="button" text="Appliquer">
+                                                <tooltip>
+                                                    <Tooltip text="Appliquer les filtres sélectionnés"/>
+                                                </tooltip>
+                                                <graphic>
+                                                    <SVGPath
+                                                            content="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                                                            fill="white"/>
+                                                </graphic>
+                                            </Button>
+                                        </children>
+                                    </HBox>
+                                </children>
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                </padding>
+                            </VBox>
+                        </content>
+                    </TitledPane>
+
+                    <!-- Reparation Table View -->
+                    <TableView fx:id="reparationTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID"/>
+                            <TableColumn fx:id="descriptionColumn" prefWidth="200.0" text="Description"/>
+                            <TableColumn fx:id="dateReparationColumn" prefWidth="120.0" text="Date"/>
+                            <TableColumn fx:id="coutColumn" prefWidth="100.0" text="Coût"/>
+                            <TableColumn fx:id="prestataireColumn" prefWidth="150.0" text="Prestataire"/>
+                        </columns>
+                        <placeholder>
+                            <Label text="Aucune réparation trouvée"/>
+                        </placeholder>
+                    </TableView>
+
+                    <!-- Action Buttons -->
+                    <HBox alignment="CENTER" spacing="15.0">
+                        <children>
+                            <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#handleAjouter"
+                                    styleClass="button, button-success" text="Ajouter">
+                                <tooltip>
+                                    <Tooltip text="Ajouter une nouvelle réparation"/>
+                                </tooltip>
+                                <graphic>
+                                    <SVGPath content="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                                             fill="white"/>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="modifierBtn" mnemonicParsing="false" onAction="#handleModifier"
+                                    styleClass="button, button-warning" text="Modifier">
+                                <tooltip>
+                                    <Tooltip text="Modifier la réparation sélectionnée"/>
+                                </tooltip>
+                                <graphic>
+                                    <SVGPath
+                                            content="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                            fill="white"/>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="supprimerBtn" mnemonicParsing="false" onAction="#handleSupprimer"
+                                    styleClass="button, button-danger" text="Supprimer">
+                                <tooltip>
+                                    <Tooltip text="Supprimer la réparation sélectionnée"/>
+                                </tooltip>
+                                <graphic>
+                                    <SVGPath
+                                            content="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                            fill="white"/>
+                                </graphic>
+                            </Button>
+                        </children>
+                    </HBox>
+                </children>
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+            </VBox>
+
+            <!-- Right Panel with Form -->
+            <ScrollPane fitToHeight="true" fitToWidth="true">
+                <content>
+                    <VBox spacing="20.0" styleClass="reparation-form">
+                        <children>
+                            <!-- Form Title -->
+                            <Label text="Détails de la réparation" styleClass="form-title"/>
+
+                            <!-- Basic Information Section -->
+                            <TitledPane animated="true" text="Informations de base" expanded="true">
+                                <content>
+                                    <GridPane hgap="20.0" vgap="20.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="100.0"
+                                                               prefWidth="120.0"/>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                            <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                            <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                            <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                        </rowConstraints>
+                                        <children>
+                                            <Label text="Description:" styleClass="form-label"/>
+                                            <TextField fx:id="descriptionField" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                                            <Label text="Date:" GridPane.rowIndex="1" styleClass="form-label"/>
+                                            <DatePicker fx:id="dateReparationPicker" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                                        styleClass="form-date-picker"/>
+
+                                            <Label text="Coût:" GridPane.rowIndex="2" styleClass="form-label"/>
+                                            <TextField fx:id="coutField" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                                       styleClass="form-field" promptText="Ex: 150.50"/>
+
+                                            <Label text="Prestataire:" GridPane.rowIndex="3" styleClass="form-label"/>
+                                            <TextField fx:id="prestataireField" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                                       styleClass="form-field" promptText="Ex: Garage Central"/>
+                                        </children>
+                                        <padding>
+                                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                        </padding>
+                                    </GridPane>
+                                </content>
+                            </TitledPane>
+
+                            <!-- Facture Section -->
+                            <TitledPane animated="true" text="Facture" expanded="true">
+                                <content>
+                                    <VBox spacing="15.0">
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="100.0"
+                                                                   prefWidth="120.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="ID Facture:" styleClass="form-label"/>
+                                                <TextField fx:id="factureIdField" GridPane.columnIndex="1" styleClass="form-field"
+                                                           promptText="Numéro de facture (optionnel)"/>
+
+                                                <Label text="Document:" GridPane.rowIndex="1" styleClass="form-label"/>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1"
+                                                      GridPane.rowIndex="1">
+                                                    <Label fx:id="facturePathLabel" text="Aucune facture attachée"
+                                                           styleClass="document-path-label" HBox.hgrow="ALWAYS"/>
+                                                </HBox>
+                                            </children>
+                                        </GridPane>
+
+                                        <!-- Facture Actions -->
+                                        <HBox fx:id="factureActionsBox" alignment="CENTER_LEFT" spacing="15.0">
+                                            <Button fx:id="uploadFactureBtn" mnemonicParsing="false" onAction="#handleUploadFacture"
+                                                    styleClass="button" text="Ajouter une facture">
+                                                <graphic>
+                                                    <SVGPath
+                                                            content="M9,16V10H5L12,3L19,10H15V16H9M5,20V18H19V20H5Z"
+                                                            fill="white"/>
+                                                </graphic>
+                                            </Button>
+                                            <Button fx:id="viewFactureBtn" mnemonicParsing="false" onAction="#handleViewFacture"
+                                                    styleClass="button-secondary" text="Voir la facture" disable="true">
+                                                <graphic>
+                                                    <SVGPath
+                                                            content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                            fill="white"/>
+                                                </graphic>
+                                            </Button>
+                                            <Button fx:id="deleteFactureBtn" mnemonicParsing="false" onAction="#handleDeleteFacture"
+                                                    styleClass="button-danger" text="Supprimer la facture" disable="true">
+                                                <graphic>
+                                                    <SVGPath
+                                                            content="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                                            fill="white"/>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+                                        <padding>
+                                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                        </padding>
+                                    </VBox>
+                                </content>
+                            </TitledPane>
+
+                            <!-- Notes Section -->
+                            <TitledPane animated="true" text="Notes" expanded="false">
+                                <content>
+                                    <GridPane hgap="20.0" vgap="20.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="100.0"
+                                                               prefWidth="120.0"/>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES"/>
+                                        </rowConstraints>
+                                        <children>
+                                            <Label text="Notes:" styleClass="form-label"/>
+                                            <TextArea fx:id="notesField" wrapText="true" GridPane.columnIndex="1"
+                                                      prefHeight="100.0"/>
+                                        </children>
+                                        <padding>
+                                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                        </padding>
+                                    </GridPane>
+                                </content>
+                            </TitledPane>
+
+                            <!-- Action Buttons -->
+                            <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                                <children>
+                                    <Button fx:id="annulerBtn" mnemonicParsing="false" onAction="#handleAnnuler"
+                                            styleClass="button, button-secondary" text="Annuler">
+                                        <tooltip>
+                                            <Tooltip text="Annuler les modifications"/>
+                                        </tooltip>
+                                        <graphic>
+                                            <SVGPath
+                                                    content="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                                    fill="white"/>
+                                        </graphic>
+                                    </Button>
+                                    <Button fx:id="enregistrerBtn" mnemonicParsing="false" onAction="#handleEnregistrer"
+                                            styleClass="button" text="Enregistrer">
+                                        <tooltip>
+                                            <Tooltip text="Enregistrer les informations de la réparation"/>
+                                        </tooltip>
+                                        <graphic>
+                                            <SVGPath
+                                                    content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                    fill="white"/>
+                                        </graphic>
+                                    </Button>
+                                </children>
+                                <padding>
+                                    <Insets top="15.0"/>
+                                </padding>
+                            </HBox>
+                        </children>
+                        <padding>
+                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                        </padding>
+                    </VBox>
+                </content>
+            </ScrollPane>
+        </SplitPane>
+    </center>
+</BorderPane>
+

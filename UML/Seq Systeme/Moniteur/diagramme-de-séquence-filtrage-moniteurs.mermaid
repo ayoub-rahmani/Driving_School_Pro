@@ -1,0 +1,22 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as MoniteurController
+    participant Svc as MoniteurService
+    participant Rep as MoniteurRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Sélectionner statut (disponible/non disponible)
+    Utilisateur->>IHM: Sélectionner catégorie de permis
+    Utilisateur->>IHM: Cliquer sur "Appliquer"
+    IHM->>Ctrl: handleApplyFilter()
+    Ctrl->>Svc: filterMoniteurs(statut, categorie)
+    Svc->>Svc: getAllMoniteurs()
+    Svc->>Rep: findAll()
+    Rep->>DB: SELECT * FROM moniteur
+    DB->>Rep: Liste de moniteurs
+    Rep->>Svc: Liste de moniteurs
+    Svc->>Svc: Filtrer la liste selon critères
+    Svc->>Ctrl: Liste de moniteurs filtrée
+    Ctrl->>IHM: Mettre à jour la table avec les résultats
+    Ctrl->>IHM: Afficher notification avec nombre de résultats

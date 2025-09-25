@@ -1,0 +1,41 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as TarifService
+    participant Rep as TarifRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un tarif dans la table
+    IHM->>Ctrl: tarifTable.getSelectionModel().selectedItemProperty().listener
+    Ctrl->>Ctrl: selectedTarif = newSelection
+    Ctrl->>Ctrl: fillTarifForm(selectedTarif)
+    Ctrl->>IHM: Remplir le formulaire avec les données du tarif
+    Utilisateur->>IHM: Cliquer sur "Modifier"
+    IHM->>Ctrl: handleModifier()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Activer le formulaire
+    Utilisateur->>IHM: Modifier les données (type de service, montant, remise, description)
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: saveTarif()
+    Ctrl->>Ctrl: Valider le formulaire
+    alt Validation réussie
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer modification
+        Ctrl->>Ctrl: Mettre à jour l'objet Tarif
+        Ctrl->>Svc: updateTarif(selectedTarif)
+        Svc->>Rep: update(tarif)
+        Rep->>DB: UPDATE tarifs SET ... WHERE id = ?
+        DB->>Rep: Nombre de lignes affectées
+        Rep->>Svc: Tarif mis à jour
+        Svc->>Ctrl: Tarif enregistré
+        Ctrl->>Audit: logAction("UPDATE", "TARIF", id, message)
+        Ctrl->>Ctrl: loadTarifs()
+        Ctrl->>Ctrl: clearForm()
+        Ctrl->>Ctrl: disableForm(true)
+        Ctrl->>IHM: Afficher notification de succès
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

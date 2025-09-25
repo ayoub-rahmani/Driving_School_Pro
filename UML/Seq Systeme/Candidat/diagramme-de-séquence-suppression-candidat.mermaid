@@ -1,0 +1,30 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as CandidatController
+    participant Svc as CandidatService
+    participant Rep as CandidatRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un candidat
+    IHM->>Ctrl: selectedItemProperty().listener
+    Ctrl->>Ctrl: populateForm(selectedCandidat)
+    Utilisateur->>IHM: Cliquer sur "Supprimer"
+    IHM->>Ctrl: handleSupprimer()
+    Ctrl->>Ctrl: Vérifier permissions
+    alt Utilisateur autorisé
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer suppression
+        IHM->>Ctrl: Confirmation
+        Ctrl->>Audit: logAction("DELETE", "CANDIDAT", id, message)
+        Ctrl->>Svc: deleteCandidat(selectedCandidat)
+        Svc->>Rep: delete(candidat)
+        Rep->>DB: DELETE FROM candidat WHERE id = ?
+        DB->>Rep: Nombre de lignes affectées
+        Rep->>Svc: Confirmation
+        Svc->>Ctrl: Confirmation
+        Ctrl->>IHM: Supprimer de la table et afficher notification
+    else Utilisateur non autorisé
+        Ctrl->>IHM: Afficher message d'accès refusé
+    end

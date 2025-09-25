@@ -1,0 +1,40 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as PaiementService
+    participant Rep as PaiementRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un paiement dans la table
+    IHM->>Ctrl: paiementTable.getSelectionModel().selectedItemProperty().listener
+    Ctrl->>Ctrl: selectedPaiement = newSelection
+    Ctrl->>Ctrl: fillPaiementForm(selectedPaiement)
+    Ctrl->>IHM: Remplir le formulaire avec les données du paiement
+    Utilisateur->>IHM: Cliquer sur "Modifier"
+    IHM->>Ctrl: handleModifier()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Activer le formulaire
+    Utilisateur->>IHM: Modifier les données
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: Valider le formulaire
+    alt Validation réussie
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer modification
+        Ctrl->>Ctrl: Mettre à jour l'objet Paiement
+        Ctrl->>Svc: updatePaiement(paiement)
+        Svc->>Rep: update(paiement)
+        Rep->>DB: UPDATE paiements SET ... WHERE id = ?
+        DB->>Rep: Nombre de lignes affectées
+        Rep->>Svc: Paiement mis à jour
+        Svc->>Ctrl: Paiement enregistré
+        Ctrl->>Audit: logAction("UPDATE", "PAIEMENT", id, message)
+        Ctrl->>Ctrl: loadPaiements()
+        Ctrl->>Ctrl: clearForm()
+        Ctrl->>Ctrl: disableForm(true)
+        Ctrl->>IHM: Afficher notification de succès
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

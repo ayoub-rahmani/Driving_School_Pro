@@ -1,0 +1,169 @@
+/* Backup Management Specific Styles */
+
+.backup-container {
+    -fx-background-image: url("../images/1.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Header Section */
+.backup-header {
+    -fx-background-color: rgba(0, 0, 0, 0.75); /* Dark overlay */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+}
+
+.backup-title {
+    -fx-text-fill: #ffffff; /* White */
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-text-fill: white;
+    -fx-padding: 8 14;
+}
+
+.icon-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Backup Table Container */
+.backup-table-container {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-padding: 24;
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 0);
+}
+
+/* Table Styling */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+    -fx-background-radius: 12;
+}
+
+.table-view .column-header {
+    -fx-background-color: #120165;
+    -fx-padding: 12px;
+    -fx-border-color: transparent transparent #aaaaaa transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #120165;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: transparent transparent #cccccc transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 0;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #007bff;
+    -fx-border-width: 0 0 1 3;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #000000;
+    -fx-border-color: #007bff;
+    -fx-border-width: 0 0 1 3;
+}
+
+/* Status Label */
+.status-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #495057;
+}
+
+/* Footer */
+.backup-footer {
+    -fx-background-color: rgba(0, 0, 0, 0.75);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, -5);
+    -fx-padding: 15 20;
+}
+
+/* Action Buttons */
+.action-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #007bff;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-text-fill: #007bff;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+    -fx-cursor: hand;
+}
+
+.action-button:hover {
+    -fx-background-color: rgba(0, 123, 255, 0.1);
+    -fx-border-color: #0056b3;
+    -fx-text-fill: #0056b3;
+}
+
+.action-button-primary {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.action-button-primary:hover {
+    -fx-background-color: #0056b3;
+    -fx-text-fill: white;
+}
+
+.action-button-danger {
+    -fx-background-color: transparent;
+    -fx-border-color: #dc3545;
+    -fx-text-fill: #dc3545;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+}
+
+.action-button-danger:hover {
+    -fx-background-color: rgba(220, 53, 69, 0.1);
+    -fx-border-color: #bd2130;
+    -fx-text-fill: #bd2130;
+}
+
+.close-button {
+    -fx-background-color: #6c757d;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.close-button:hover {
+    -fx-background-color: #5a6268;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+    -fx-progress-color: #007bff;
+}
+

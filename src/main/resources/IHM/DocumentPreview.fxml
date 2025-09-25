@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0"
+            stylesheets="@../Styles/Common.css,@../Styles/DocumentPreview.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.DocumentPreviewController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="header">
+            <Label fx:id="documentTitleLabel" text="Aperçu du document" styleClass="header-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleCloseButton"
+                    styleClass="icon-button">
+                <tooltip>
+                    <Tooltip text="Fermer"/>
+                </tooltip>
+                <graphic>
+                    <SVGPath content="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                             fill="white" scaleX="1.2" scaleY="1.2"/>
+                </graphic>
+            </Button>
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+            <content>
+                <StackPane styleClass="document-preview-container">
+                    <!-- Image Preview Container -->
+                    <VBox fx:id="imageContainer" alignment="CENTER" styleClass="image-container">
+                        <ImageView fx:id="imagePreview" preserveRatio="true"
+                                   fitWidth="700.0" fitHeight="500.0"/>
+                    </VBox>
+
+                    <!-- PDF Preview Container -->
+                    <VBox fx:id="pdfContainer" alignment="CENTER" styleClass="pdf-container" visible="false">
+                        <Label styleClass="section-label" text="Ce document ne peut pas être affiché directement" />
+                        <Label text="Le document a été ouvert dans votre application par défaut." />
+                        <Button fx:id="openExternalBtn" text="Ouvrir à nouveau"
+                                onAction="#handleOpenExternal" styleClass="button">
+                            <graphic>
+                                <SVGPath content="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+                                         fill="white"/>
+                            </graphic>
+                        </Button>
+                    </VBox>
+
+                    <!-- Error Label -->
+                    <Label fx:id="errorLabel" text="Erreur lors du chargement du document"
+                           styleClass="error-label" visible="false"/>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </StackPane>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" styleClass="footer">
+            <Label fx:id="documentPathLabel" styleClass="document-path-label" text="Chemin du document" wrapText="true" />
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+        </HBox>
+    </bottom>
+</BorderPane>
+

@@ -1,0 +1,579 @@
+/* Candidat Screen Specific Styles */
+
+.candidat-container {
+    -fx-background-image: url("../images/1.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Main containers with consistent styling */
+.candidat-form {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Changed to 0.2 opacity */
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 0);
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-width: 2; /* Thicker border */
+    -fx-border-radius: 20;
+    -fx-padding: 24;
+}
+
+.candidat-table-container {
+    -fx-background-color: rgba(255, 255, 255, 0.2); /* Changed to 0.2 opacity */
+    -fx-padding: 24;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-width: 2; /* Thicker border */
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 0);
+}
+
+/* Header with consistent styling */
+.candidat-header {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 0);
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 20;
+    -fx-border-width: 2; /* Thicker border */
+}
+
+/* Badge styling with consistent look */
+.candidat-info-badge {
+    -fx-background-color: #e0e0e0; /* Darker background */
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+}
+
+.badge {
+    -fx-background-color: -fx-success;
+    -fx-background-radius: 8;
+    -fx-padding: 6 12;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0, 0, 0);
+}
+
+/* Status indicators with consistent styling */
+.status-active {
+    -fx-text-fill: -fx-success;
+    -fx-font-weight: bold;
+}
+
+.status-inactive {
+    -fx-text-fill: -fx-danger;
+    -fx-font-weight: bold;
+}
+
+/* Document preview with consistent styling */
+.document-preview {
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 12;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 4, 0, 0, 0);
+}
+
+/* Document button with consistent styling */
+.document-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 0);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.document-button:hover {
+    -fx-background-color: derive(-fx-primary, 15%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* Category checkbox with consistent styling */
+.category-checkbox {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 16;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+    -fx-padding: 16;
+    -fx-transition: all 0.2s ease-in-out;
+}
+.category-checkbox-text {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+.category-checkbox:hover {
+    -fx-border-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* Section label with consistent styling */
+.section-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Photo placeholder with consistent styling */
+.photo-placeholder {
+    -fx-background-color: #e0e0e0; /* Darker background */
+    -fx-background-radius: 40px;
+    -fx-border-radius: 40px;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 4; /* Thicker border */
+}
+
+/* Fees field with consistent styling */
+.fees-field {
+    -fx-pref-width: 140px;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Search box with consistent styling */
+.search-box {
+    -fx-background-color: white;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 10;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-background-radius: 10;
+    -fx-padding: 12 16;
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: #777777; /* Darker placeholder text */
+}
+
+.search-box:focused {
+    -fx-border-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 71, 171, 0.15), 5, 0, 0, 0);
+}
+
+.search-box:hover {
+    -fx-border-color: -fx-primary;
+}
+.left-panel-scroll{
+
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Content background with consistent styling */
+.content-background {
+    -fx-background-color: transparent;
+}
+
+/* Document preview container with consistent styling */
+.document-preview-container {
+    -fx-background-color: rgba(248, 249, 250, 0.8);
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 16;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-padding: 24;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+}
+
+.document-preview-container ImageView {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
+    -fx-background-color: white;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-width: 3; /* Thicker border */
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+/* Document generation section with consistent styling */
+.document-generation-section {
+    -fx-background-color: rgba(248, 249, 250, 0.8);
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 16;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-padding: 20;
+    -fx-spacing: 16;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+}
+
+/* Filter section with consistent styling */
+.filter-section {
+    -fx-background-color: rgba(248, 249, 250, 0.8);
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 16;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-padding: 20;
+    -fx-spacing: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+}
+
+/* Candidate details section */
+.candidate-details-section {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 16;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+}
+
+/* Candidate info grid */
+.candidate-info-grid {
+    -fx-hgap: 16;
+    -fx-vgap: 16;
+    -fx-padding: 16;
+}
+
+/* Info label */
+.info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-medium-gray;
+}
+
+.info-value {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+}
+
+/* License category badge */
+.license-category-badge {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 3, 0, 0, 0);
+}
+
+/* Payment status badges */
+.payment-complete {
+    -fx-background-color: -fx-success;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.payment-pending {
+    -fx-background-color: -fx-warning;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.payment-overdue {
+    -fx-background-color: -fx-danger;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-padding: 6 12;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Progress indicator */
+.progress-indicator {
+    -fx-progress-color: -fx-primary;
+}
+
+.progress-indicator .percentage {
+    -fx-fill: -fx-primary-dark;
+    -fx-font-weight: bold;
+}
+
+/* Document list */
+.document-list {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-radius: 12;
+    -fx-border-width: 2; /* Thicker border */
+    -fx-padding: 0;
+}
+
+.document-list .list-cell {
+    -fx-padding: 12;
+    -fx-border-color: transparent transparent #cccccc transparent;
+    -fx-border-width: 0 0 1 0; /* Thicker horizontal borders */
+}
+
+/* Document list hover and selection effects */
+.document-list .list-cell:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 1 3;
+}
+
+.document-list .list-cell:selected {
+    -fx-background-color: #e0e0e0; /* Light gray instead of blue */
+    -fx-text-fill: -fx-dark-gray;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 1 3; /* Left border indicator */
+}
+
+/* Document item */
+.document-item {
+    -fx-spacing: 12;
+    -fx-alignment: center-left;
+}
+
+.document-icon {
+    -fx-fill: -fx-primary;
+}
+
+/* Make document names more visible */
+.document-name {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000; /* Darker text color */
+}
+
+.document-date {
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-medium-gray;
+}
+
+/* Action buttons */
+.action-button {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
+    -fx-padding: 8 14;
+}
+
+.action-button:hover {
+    -fx-background-color: -fx-primary-ultralight;
+    -fx-border-color: -fx-primary-dark;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+.action-button-primary {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+}
+
+.action-button-primary:hover {
+    -fx-background-color: derive(-fx-primary, 15%);
+    -fx-text-fill: white;
+}
+
+.action-button-danger {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-danger;
+    -fx-text-fill: -fx-danger;
+}
+
+.action-button-danger:hover {
+    -fx-background-color: derive(-fx-danger-light, 80%);
+    -fx-border-color: -fx-danger;
+    -fx-text-fill: -fx-danger;
+}
+
+/* Tabs for candidate details */
+.candidate-tabs {
+    -fx-tab-min-width: 120px;
+}
+
+.candidate-tabs .tab-header-area .tab-header-background {
+    -fx-background-color: -fx-primary-ultralight;
+    -fx-border-color: #aaaaaa; /* Darker border */
+    -fx-border-width: 0 0 2 0; /* Thicker border */
+}
+
+.candidate-tabs .tab {
+    -fx-background-color: transparent;
+    -fx-padding: 12 20;
+}
+
+.candidate-tabs .tab:selected {
+    -fx-background-color: white;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 4 0; /* Thicker indicator */
+}
+
+.candidate-tabs .tab .tab-label {
+    -fx-text-fill: -fx-medium-gray;
+    -fx-font-weight: normal;
+}
+
+.candidate-tabs .tab:selected .tab-label {
+    -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
+}
+
+/* Enhanced table styling */
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ffffff; /* Remove background color change */
+    -fx-border-color: -fx-primary; /* Add border color */
+    -fx-border-width: 0 0 1 3; /* Left and bottom border */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #e0e0e0; /* Light gray background instead of blue */
+    -fx-text-fill: #000000; /* Black text for better contrast */
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 1 3; /* Left border indicator */
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 0);
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-padding: 24;
+}
+
+/* Dashboard icon container */
+.dashboard-icon {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 50%;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 0);
+}
+
+/* Stat cards */
+.stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.stat-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-medium-gray;
+}
+
+.stat-value {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Chart containers */
+.chart-container {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+}
+
+.chart-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-padding: 0 0 10 0;
+}
+
+/* Chart styling */
+.chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: #8a8a8a;
+    -fx-stroke-width: 2px;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.chart-legend-item {
+    -fx-font-size: 14px;
+}
+
+.chart-legend-item-symbol {
+    -fx-background-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.chart-bar {
+    -fx-bar-fill: -fx-primary;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-background-position: center center;
+}
+
+.axis {
+    -fx-font-size: 14px;
+    -fx-tick-label-fill: -fx-dark-gray;
+    -fx-font-family: "System";
+}
+
+.axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 1px;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 1px;
+}
+
+/* Filter label */
+.filter-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+}
+

@@ -1,0 +1,26 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as ExamenController
+    participant Svc as ExamenService
+    participant Rep as ExamenRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Cliquer sur "Tableau de Bord"
+    IHM->>Ctrl: toggleDashboard()
+    Ctrl->>Ctrl: refreshDashboard()
+    Ctrl->>Svc: getAllExamens()
+    Svc->>Rep: findAll()
+    Rep->>DB: SELECT * FROM examen
+    DB->>Rep: Liste d'examens
+    Rep->>Svc: Liste d'examens
+    Svc->>Ctrl: Liste d'examens
+    Ctrl->>Ctrl: Calculer statistiques (total, validés, en attente)
+    Ctrl->>Ctrl: Calculer répartition par type d'examen
+    Ctrl->>Ctrl: Calculer répartition par mois
+    Ctrl->>IHM: Mettre à jour totalExamensDashboardLabel
+    Ctrl->>IHM: Mettre à jour examensValidesDashboardLabel
+    Ctrl->>IHM: Mettre à jour examensEnAttenteDashboardLabel
+    Ctrl->>IHM: Mettre à jour typeExamenChart
+    Ctrl->>IHM: Mettre à jour examensParMoisChart
+    Ctrl->>IHM: Afficher notification de succès

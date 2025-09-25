@@ -1,0 +1,30 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as CandidatController
+    participant Svc as CandidatService
+    participant Doc as Document
+    participant PDF as PdfGenerator
+    participant Rep as CandidatRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Sélectionner un candidat
+    Utilisateur->>IHM: Cliquer sur "Générer Fiche"
+    IHM->>Ctrl: handleGenerateDocument()
+    Ctrl->>Svc: generateCandidatFichePDF(candidatId)
+    Svc->>Rep: findById(candidatId)
+    Rep->>DB: SELECT * FROM candidat WHERE id = ?
+    DB->>Rep: Données du candidat
+    Rep->>Svc: Optional<Candidat>
+    Svc->>Doc: new Document(candidat, "Fiche Candidat")
+    Svc->>PDF: generatePdfDocument(document)
+    PDF->>PDF: Créer PDF
+    PDF->>Svc: Chemin du fichier PDF
+    Svc->>Svc: saveAsImage(pdfPath, outputImageName)
+    Svc->>Rep: save(candidat) avec chemins mis à jour
+    Rep->>DB: UPDATE candidat SET chemin_fiche_pdf = ?, chemin_fiche_png = ? WHERE id = ?
+    DB->>Rep: Confirmation
+    Rep->>Svc: Candidat mis à jour
+    Svc->>Ctrl: Chemin du fichier PDF
+    Ctrl->>Ctrl: openPdfFile(filePath)
+    Ctrl->>IHM: Afficher notification de succès

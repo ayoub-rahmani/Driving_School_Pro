@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<BorderPane prefHeight="900.0" prefWidth="1600.0"
+            styleClass="vehicule-container"
+            stylesheets="@../Styles/Common.css,@../Styles/Vehicule.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.VehiculeController">
+    <!-- Header section -->
+    <top>
+        <!-- Header Section -->
+        <HBox alignment="CENTER" spacing="20.0" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Back Button -->
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Retour"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo and Title -->
+                <StackPane styleClass="logo-container">
+                    <SVGPath
+                            content="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z"
+                            fill="brown" scaleX="1.5" scaleY="1.5"/>
+                </StackPane>
+                <Label styleClass="header-label" text="GESTION DES VÉHICULES"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Dashboard Button -->
+                <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#toggleDashboard"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Tableau de bord"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M3,11H11V3H3M3,21H11V13H3M13,21H21V13H13M13,3V11H21V3"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Settings Button -->
+                <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#handleSettings"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Paramètres"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+                <!-- Notification Button -->
+                <Button fx:id="notificationBtn" mnemonicParsing="false"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Notifications"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M12,22A2,2 0 0,0 14,20H10A2,2 0 0,0 12,22M18,16V11C18,7.93 16.36,5.36 13.5,4.68V4A1.5,1.5 0 0,0 12,2.5A1.5,1.5 0 0,0 10.5,4V4.68C7.63,5.36 6,7.92 6,11V16L4,18V19H20V18L18,16Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Help Button -->
+                <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#handleHelp"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Aide"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <left>
+        <!-- Left Panel with Search, Table, and Actions -->
+        <ScrollPane styleClass="left-panel-scroll" fitToWidth="true">
+            <content>
+                <VBox prefWidth="400.0" spacing="20.0" styleClass="vehicule-table-container, left-panel-content"
+                      BorderPane.alignment="CENTER">
+                    <children>
+                        <!-- Search Bar (Taking Full Width) -->
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <TextField fx:id="rechercheField" promptText="Rechercher par immatriculation ou marque..."
+                                           HBox.hgrow="ALWAYS" styleClass="search-box" onKeyReleased="#handleRecherche"/>
+                                <Button fx:id="rechercheBtn" mnemonicParsing="false" onAction="#handleRecherche"
+                                        styleClass="icon-button">
+                                    <tooltip>
+                                        <Tooltip text="Rechercher"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath
+                                                content="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                                                fill="#ff0202"/>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+
+                        <!-- Vehicule Table View -->
+                        <TableView fx:id="vehiculeTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID"/>
+                                <TableColumn fx:id="marqueColumn" prefWidth="100.0" text="Marque"/>
+                                <TableColumn fx:id="modeleColumn" prefWidth="100.0" text="Modèle"/>
+                                <TableColumn fx:id="matriculeColumn" prefWidth="100.0" text="Immatriculation"/>
+                                <TableColumn fx:id="typeColumn" prefWidth="80.0" text="Type"/>
+                                <TableColumn fx:id="kilometrageColumn" prefWidth="80.0" text="Km"/>
+                            </columns>
+                            <placeholder>
+                                <Label text="Aucun véhicule trouvé"/>
+                            </placeholder>
+                        </TableView>
+
+                        <!-- Action Buttons -->
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#handleAjouter"
+                                        styleClass="button, button-success" text="Ajouter">
+                                    <tooltip>
+                                        <Tooltip text="Ajouter un nouveau véhicule"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath content="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                                                 fill="white"/>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="modifierBtn" mnemonicParsing="false" onAction="#handleModifier"
+                                        styleClass="button, button-warning" text="Modifier">
+                                    <tooltip>
+                                        <Tooltip text="Modifier le véhicule sélectionné"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath
+                                                content="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                                fill="white"/>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="supprimerBtn" mnemonicParsing="false" onAction="#handleSupprimer"
+                                        styleClass="button, button-danger" text="Supprimer">
+                                    <tooltip>
+                                        <Tooltip text="Supprimer le véhicule sélectionné"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath
+                                                content="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                                fill="white"/>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+
+
+
+                        <!-- Filters TitledPane -->
+                        <TitledPane animated="true" text="Filtres" expanded="false">
+                            <content>
+                                <VBox spacing="15" styleClass="filter-section">
+                                    <children>
+                                        <!-- Status Filter -->
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Label text="Statut:" styleClass="filter-label"/>
+                                                <ComboBox fx:id="statutFilter" prefWidth="150.0"
+                                                          promptText="Tous les statuts">
+                                                    <items>
+                                                        <FXCollections fx:factory="observableArrayList">
+                                                            <String fx:value="Tous les statuts"/>
+                                                            <String fx:value="Disponible"/>
+                                                            <String fx:value="Non disponible"/>
+                                                        </FXCollections>
+                                                    </items>
+                                                </ComboBox>
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Type Filter -->
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Label text="Type:" styleClass="filter-label"/>
+                                                <ComboBox fx:id="typeFilter" prefWidth="150.0"
+                                                          promptText="Tous les types">
+                                                    <items>
+                                                        <FXCollections fx:factory="observableArrayList">
+                                                            <String fx:value="Tous les types"/>
+                                                            <String fx:value="Moto"/>
+                                                            <String fx:value="Voiture"/>
+                                                            <String fx:value="Camion"/>
+                                                        </FXCollections>
+                                                    </items>
+                                                </ComboBox>
+                                            </children>
+                                        </HBox>
+
+                                        <!-- Apply and Reset Buttons -->
+                                        <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                            <children>
+                                                <Button fx:id="resetFilterBtn" mnemonicParsing="false"
+                                                        onAction="#handleResetFilter"
+                                                        styleClass="button-secondary" text="Réinitialiser">
+                                                    <tooltip>
+                                                        <Tooltip text="Réinitialiser tous les filtres"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+                                                <Button fx:id="applyFilterBtn" mnemonicParsing="false"
+                                                        onAction="#handleApplyFilter"
+                                                        styleClass="button" text="Appliquer">
+                                                    <tooltip>
+                                                        <Tooltip text="Appliquer les filtres sélectionnés"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                    </padding>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+
+                        <!-- Reparations Button -->
+                        <Button fx:id="reparationsBtn" mnemonicParsing="false" onAction="#handleReparations"
+                                styleClass="button, button-info" text="Gérer les réparations" maxWidth="Infinity">
+                            <tooltip>
+                                <Tooltip text="Gérer les réparations du véhicule sélectionné"/>
+                            </tooltip>
+                            <graphic>
+                                <SVGPath
+                                        content="M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3"
+                                        fill="white"/>
+                            </graphic>
+                        </Button>
+
+                        <Button fx:id="exportBtn" mnemonicParsing="false"
+                                styleClass="button" text="Exporter les données" maxWidth="Infinity" onAction="#handleExport">
+                            <tooltip>
+                                <Tooltip text="Exporter les données des véhicules"/>
+                            </tooltip>
+                            <graphic>
+                                <SVGPath
+                                        content="M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z"
+                                        fill="white"/>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <!-- Central Content Area: Vehicule Form and Dashboard -->
+        <StackPane>
+            <children>
+                <!-- Form ScrollPane -->
+                <ScrollPane fx:id="formScrollPane" fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER"
+                            styleClass="content-background">
+                    <content>
+                        <VBox spacing="20.0" styleClass="vehicule-form">
+                            <children>
+                                <!-- Vehicule Header -->
+                                <HBox alignment="CENTER_LEFT" spacing="15" styleClass="vehicule-header">
+                                    <!-- Vehicule Photo -->
+                                    <ImageView fx:id="vehiculePhoto"
+                                               fitHeight="100.0"
+                                               fitWidth="100.0"
+                                               pickOnBounds="true"
+                                               preserveRatio="true"
+                                               styleClass="photo-placeholder, fixed-size-image">
+                                        <image>
+                                            <Image url="@../images/vehiculle.png"/>
+                                        </image>
+                                    </ImageView>
+
+                                    <!-- Vehicule Information -->
+                                    <VBox spacing="10">
+                                        <Label fx:id="vehiculeNameLabel" styleClass="section-label" text="Nouveau Véhicule"/>
+                                        <HBox spacing="10" alignment="CENTER_LEFT">
+                                            <!-- Availability indicator -->
+                                            <StackPane fx:id="availabilityIndicator" styleClass="availability-indicator">
+                                                <padding>
+                                                    <Insets right="5"/>
+                                                </padding>
+                                            </StackPane>
+                                            <!-- Availability label -->
+                                            <Label fx:id="availabilityLabel" text="Disponible"/>
+
+                                            <!-- Type badges container -->
+                                            <HBox fx:id="typeBadgesContainer" spacing="5" alignment="CENTER_LEFT">
+                                                <padding>
+                                                    <Insets left="15"/>
+                                                </padding>
+                                                <!-- Badges will be added dynamically in the controller -->
+                                            </HBox>
+                                        </HBox>
+                                    </VBox>
+                                </HBox>
+
+                                <!-- Basic Information Section -->
+                                <TitledPane animated="true" text="Informations de base" expanded="true">
+                                    <content>
+                                        <GridPane hgap="30.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Marque:" styleClass="form-label"/>
+                                                <TextField fx:id="marqueField" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                                                <Label text="Modèle:" GridPane.columnIndex="2" styleClass="form-label"/>
+                                                <TextField fx:id="modeleField" GridPane.columnIndex="3" styleClass="form-field"/>
+
+                                                <Label text="Immatriculation:" GridPane.rowIndex="1" styleClass="form-label"/>
+                                                <TextField fx:id="matriculeField" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                                           styleClass="form-field"/>
+
+                                                <Label text="Kilométrage:" GridPane.columnIndex="2"
+                                                       GridPane.rowIndex="1" styleClass="form-label"/>
+                                                <TextField fx:id="kilometrageField" GridPane.columnIndex="3"
+                                                           GridPane.rowIndex="1" styleClass="form-field"/>
+
+                                                <Label text="Date mise en service:" GridPane.rowIndex="2" styleClass="form-label"/>
+                                                <DatePicker fx:id="dateMiseEnServicePicker" GridPane.columnIndex="1"
+                                                            GridPane.rowIndex="2" styleClass="form-date-picker"/>
+
+                                                <Label text="Date prochain entretien:" GridPane.columnIndex="2"
+                                                       GridPane.rowIndex="2" styleClass="form-label"/>
+                                                <DatePicker fx:id="dateProchainEntretienPicker" GridPane.columnIndex="3"
+                                                            GridPane.rowIndex="2" styleClass="form-date-picker"/>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Documents Section -->
+                                <TitledPane animated="true" text="Documents et échéances" expanded="true">
+                                    <content>
+                                        <GridPane hgap="30.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Date vignette:" styleClass="form-label"/>
+                                                <DatePicker fx:id="dateVignettePicker" GridPane.columnIndex="1"
+                                                            styleClass="form-date-picker"/>
+
+                                                <Label text="Date assurance:" GridPane.columnIndex="2" styleClass="form-label"/>
+                                                <DatePicker fx:id="dateAssurancePicker" GridPane.columnIndex="3"
+                                                            styleClass="form-date-picker"/>
+
+                                                <Label text="Date visite technique:" GridPane.rowIndex="1" styleClass="form-label"/>
+                                                <DatePicker fx:id="dateVisiteTechniquePicker" GridPane.columnIndex="1"
+                                                            GridPane.rowIndex="1" styleClass="form-date-picker"/>
+
+                                                <Label text="Papiers:" GridPane.rowIndex="2" styleClass="form-label"/>
+                                                <TextArea fx:id="papiersField" wrapText="true" GridPane.columnIndex="1"
+                                                          GridPane.rowIndex="2" GridPane.columnSpan="3"/>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Type and Status Section -->
+                                <TitledPane animated="true" text="Type et disponibilité" expanded="true">
+                                    <content>
+                                        <GridPane hgap="30.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Type de véhicule:" styleClass="form-label"/>
+                                                <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.columnSpan="3">
+                                                    <children>
+                                                        <VBox styleClass="type-radio-container" spacing="10">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true"
+                                                                           preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../images/a.jpeg"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <RadioButton fx:id="typeA" mnemonicParsing="false"
+                                                                             text="Moto (Type A)" styleClass="type-radio-text">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="typeGroup"/>
+                                                                    </toggleGroup>
+                                                                </RadioButton>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                                            </padding>
+                                                        </VBox>
+
+                                                        <VBox styleClass="type-radio-container" spacing="10">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true"
+                                                                           preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../images/B.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <RadioButton fx:id="typeB" mnemonicParsing="false"
+                                                                             text="Voiture (Type B)" styleClass="type-radio-text"
+                                                                             toggleGroup="$typeGroup"/>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                                            </padding>
+                                                        </VBox>
+
+                                                        <VBox styleClass="type-radio-container" spacing="10">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true"
+                                                                           preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../images/C.jpg"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <RadioButton fx:id="typeC" mnemonicParsing="false"
+                                                                             text="Camion (Type C)" styleClass="type-radio-text"
+                                                                             toggleGroup="$typeGroup"/>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                                                            </padding>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="Disponibilité:" GridPane.rowIndex="1" styleClass="form-label"/>
+                                                <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="1"
+                                                      GridPane.rowIndex="1">
+                                                    <children>
+                                                        <RadioButton fx:id="disponibleOui" mnemonicParsing="false" text="Disponible"
+                                                                     styleClass="status-active">
+                                                            <toggleGroup>
+                                                                <ToggleGroup fx:id="disponibiliteGroup"/>
+                                                            </toggleGroup>
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"
+                                                                        fill="#10b981"/>
+                                                            </graphic>
+                                                        </RadioButton>
+                                                        <RadioButton fx:id="disponibleNon" mnemonicParsing="false"
+                                                                     text="Non disponible" styleClass="status-inactive"
+                                                                     toggleGroup="$disponibiliteGroup">
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
+                                                                        fill="#ef4444"/>
+                                                            </graphic>
+                                                        </RadioButton>
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="Motif:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="form-label"/>
+                                                <TextField fx:id="motifField" promptText="Raison de l'indisponibilité"
+                                                           GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="form-field"/>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Notes Section -->
+                                <TitledPane animated="true" text="Notes" expanded="false">
+                                    <content>
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Notes:" styleClass="form-label"/>
+                                                <TextArea fx:id="notesField" wrapText="true" GridPane.columnIndex="1"/>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Action Buttons -->
+                                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                                    <children>
+                                        <Button fx:id="annulerBtn" mnemonicParsing="false" onAction="#handleAnnuler"
+                                                styleClass="button, button-secondary" text="Annuler">
+                                            <tooltip>
+                                                <Tooltip text="Annuler les modifications"/>
+                                            </tooltip>
+                                            <graphic>
+                                                <SVGPath
+                                                        content="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                                        fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="enregistrerBtn" mnemonicParsing="false" onAction="#handleEnregistrer"
+                                                styleClass="button" text="Enregistrer">
+                                            <tooltip>
+                                                <Tooltip text="Enregistrer les informations du véhicule"/>
+                                            </tooltip>
+                                            <graphic>
+                                                <SVGPath
+                                                        content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                        fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets top="15.0"/>
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <!-- Dashboard Panel -->
+                <VBox fx:id="dashboardPane" spacing="20.0" styleClass="dashboard-container" visible="false">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+
+                    <!-- Dashboard Header -->
+                    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="vehicule-header">
+                        <StackPane styleClass="dashboard-icon">
+                            <SVGPath content="M3,11H11V3H3M3,21H11V13H3M13,21H21V13H13M13,3V11H21V3"
+                                     fill="white" scaleX="1.5" scaleY="1.5"/>
+                        </StackPane>
+                        <Label styleClass="section-label" text="Tableau de Bord"/>
+                    </HBox>
+
+                    <!-- Stats Cards -->
+                    <HBox spacing="20" alignment="CENTER">
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Total des véhicules"/>
+                            <Label fx:id="totalVehiculesLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Véhicules disponibles"/>
+                            <Label fx:id="vehiculesDisponiblesLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Véhicules indisponibles"/>
+                            <Label fx:id="vehiculesIndisponiblesLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Documents expirant bientôt"/>
+                            <Label fx:id="documentsExpirantLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Charts -->
+                    <HBox spacing="20" VBox.vgrow="ALWAYS">
+                        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                            <Label styleClass="chart-title" text="Répartition par type de véhicule"/>
+                            <PieChart fx:id="typeVehiculeChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+
+                        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                            <Label styleClass="chart-title" text="Documents expirant dans les 30 jours"/>
+                            <BarChart fx:id="documentExpirationChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                <xAxis>
+                                    <CategoryAxis label="Type de document"/>
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Nombre de véhicules"/>
+                                </yAxis>
+                            </BarChart>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Refresh Button -->
+                    <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                        <Button fx:id="refreshDashboardBtn" mnemonicParsing="false" onAction="#refreshDashboard"
+                                styleClass="button" text="Actualiser">
+                            <graphic>
+                                <SVGPath
+                                        content="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
+                                        fill="white"/>
+                            </graphic>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>
+

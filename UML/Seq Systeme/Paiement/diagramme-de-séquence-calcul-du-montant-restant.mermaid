@@ -1,0 +1,70 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant SvcPaiement as PaiementService
+    participant SvcTarif as TarifService
+    participant SvcSeance as SeanceService
+    participant SvcExamen as ExamenService
+    participant RepPaiement as PaiementRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Sélectionner un candidat
+    IHM->>Ctrl: candidatComboBox.valueProperty().listener
+    Ctrl->>Ctrl: updatePaiementProgress(candidatId)
+    
+    Ctrl->>Ctrl: calculateTotalDuForCandidat(candidatId)
+    Ctrl->>SvcSeance: countSeancesByTypeAndCandidat(TypeSeance.Code, candidatId)
+    SvcSeance->>DB: SELECT COUNT(*) FROM seances WHERE candidat_id = ? AND type = 'Code'
+    DB->>SvcSeance: Nombre de séances de code
+    SvcSeance->>Ctrl: Nombre de séances de code
+    
+    Ctrl->>SvcTarif: getMontantTarifByTypeService("SEANCE_CODE")
+    SvcTarif->>DB: SELECT montant FROM tarifs WHERE type_service = 'SEANCE_CODE' AND actif = true
+    DB->>SvcTarif: Montant du tarif
+    SvcTarif->>Ctrl: Montant du tarif
+    
+    Ctrl->>SvcSeance: countSeancesByTypeAndCandidat(TypeSeance.Conduite, candidatId)
+    SvcSeance->>DB: SELECT COUNT(*) FROM seances WHERE candidat_id = ? AND type = 'Conduite'
+    DB->>SvcSeance: Nombre de séances de conduite
+    SvcSeance->>Ctrl: Nombre de séances de conduite
+    
+    Ctrl->>SvcTarif: getMontantTarifByTypeService("SEANCE_CONDUITE")
+    SvcTarif->>DB: SELECT montant FROM tarifs WHERE type_service = 'SEANCE_CONDUITE' AND actif = true
+    DB->>SvcTarif: Montant du tarif
+    SvcTarif->>Ctrl: Montant du tarif
+    
+    Ctrl->>SvcExamen: countExamensByTypeAndCandidat("CODE", candidatId)
+    SvcExamen->>DB: SELECT COUNT(*) FROM examens WHERE candidat_id = ? AND type_examen = 'CODE'
+    DB->>SvcExamen: Nombre d'examens de code
+    SvcExamen->>Ctrl: Nombre d'examens de code
+    
+    Ctrl->>SvcTarif: getMontantTarifByTypeService("EXAMEN_CODE")
+    SvcTarif->>DB: SELECT montant FROM tarifs WHERE type_service = 'EXAMEN_CODE' AND actif = true
+    DB->>SvcTarif: Montant du tarif
+    SvcTarif->>Ctrl: Montant du tarif
+    
+    Ctrl->>SvcExamen: countExamensByTypeAndCandidat("CONDUITE", candidatId)
+    SvcExamen->>DB: SELECT COUNT(*) FROM examens WHERE candidat_id = ? AND type_examen = 'CONDUITE'
+    DB->>SvcExamen: Nombre d'examens de conduite
+    SvcExamen->>Ctrl: Nombre d'examens de conduite
+    
+    Ctrl->>SvcTarif: getMontantTarifByTypeService("EXAMEN_CONDUITE")
+    SvcTarif->>DB: SELECT montant FROM tarifs WHERE type_service = 'EXAMEN_CONDUITE' AND actif = true
+    DB->>SvcTarif: Montant du tarif
+    SvcTarif->>Ctrl: Montant du tarif
+    
+    Ctrl->>Ctrl: Calculer le total dû (somme des services * tarifs)
+    
+    Ctrl->>Ctrl: getTotalPayeForCandidat(candidatId)
+    Ctrl->>SvcPaiement: getTotalPaiementsByCandidatId(candidatId)
+    SvcPaiement->>RepPaiement: getByCandidatId(candidatId)
+    RepPaiement->>DB: SELECT * FROM paiements WHERE candidat_id = ?
+    DB->>RepPaiement: Liste des paiements
+    RepPaiement->>SvcPaiement: Liste des paiements
+    SvcPaiement->>Ctrl: Total des paiements
+    
+    Ctrl->>Ctrl: calculateResteAPayer(candidatId)
+    Ctrl->>Ctrl: Calculer reste à payer (total dû - total payé)
+    Ctrl->>IHM: Mettre à jour la barre de progression et les labels
+    Ctrl->>IHM: Mettre à jour maxMontantLabel

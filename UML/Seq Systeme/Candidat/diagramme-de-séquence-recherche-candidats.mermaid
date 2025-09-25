@@ -1,0 +1,19 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as CandidatController
+    participant Svc as CandidatService
+    participant Rep as CandidatRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Saisir terme de recherche
+    Utilisateur->>IHM: Cliquer sur "Rechercher"
+    IHM->>Ctrl: handleRecherche()
+    Ctrl->>Svc: searchCandidats(searchText)
+    Svc->>Rep: findByNomOrPrenomOrCin(searchTerm)
+    Rep->>DB: SELECT * FROM candidat WHERE nom LIKE ? OR prenom LIKE ? OR cin LIKE ?
+    DB->>Rep: Résultats
+    Rep->>Svc: Liste de candidats
+    Svc->>Ctrl: Liste de candidats
+    Ctrl->>IHM: Mettre à jour la table avec les résultats
+    Ctrl->>IHM: Afficher notification avec nombre de résultats

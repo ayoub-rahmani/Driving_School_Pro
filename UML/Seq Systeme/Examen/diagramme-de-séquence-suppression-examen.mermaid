@@ -1,0 +1,32 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as ExamenController
+    participant Svc as ExamenService
+    participant Rep as ExamenRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un examen
+    IHM->>Ctrl: examenTable.selectedItemProperty().listener
+    Ctrl->>Ctrl: populateForm(selectedExamen)
+    Utilisateur->>IHM: Cliquer sur "Supprimer"
+    IHM->>Ctrl: handleSupprimer()
+    Ctrl->>Ctrl: Vérifier permissions
+    alt Utilisateur autorisé
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer suppression
+        IHM->>Ctrl: Confirmation
+        Ctrl->>Audit: logAction("DELETE", "EXAMEN", id, message)
+        Ctrl->>Svc: deleteExamen(selectedExamen)
+        Svc->>Rep: delete(examen)
+        Rep->>DB: DELETE FROM examen WHERE id = ?
+        DB->>Rep: Nombre de lignes affectées
+        Rep->>Svc: Confirmation
+        Svc->>Ctrl: Confirmation
+        Ctrl->>Ctrl: examenTable.getItems().remove(selectedExamen)
+        Ctrl->>Ctrl: clearForm()
+        Ctrl->>IHM: Afficher notification de succès
+    else Utilisateur non autorisé
+        Ctrl->>IHM: Afficher message d'accès refusé
+    end

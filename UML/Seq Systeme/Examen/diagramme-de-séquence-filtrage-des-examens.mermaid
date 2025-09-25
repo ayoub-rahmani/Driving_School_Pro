@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as ExamenController
+    participant Svc as ExamenService
+    participant Rep as ExamenRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Sélectionner type d'examen
+    Utilisateur->>IHM: Sélectionner dates début/fin
+    Utilisateur->>IHM: Sélectionner statut
+    Utilisateur->>IHM: Cliquer sur "Appliquer"
+    IHM->>Ctrl: handleApplyFilter()
+    Ctrl->>Svc: filterExamens(type, startDate, endDate, status)
+    Svc->>Rep: findByFilters(type, startDate, endDate, status)
+    Rep->>DB: SELECT * FROM examen WHERE ... (avec filtres)
+    DB->>Rep: Liste d'examens filtrée
+    Rep->>Svc: Liste d'examens filtrée
+    Svc->>Ctrl: Liste d'examens filtrée
+    Ctrl->>IHM: Mettre à jour la table avec les résultats
+    Ctrl->>IHM: Afficher notification avec nombre de résultats

@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<BorderPane prefHeight="900.0" prefWidth="1600.0"
+            styleClass="dashboard-container"
+            stylesheets="@../Styles/Common.css,@../Styles/Dashboard.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.DashboardController">
+
+    <top>
+        <!-- Header Section -->
+        <HBox alignment="CENTER" spacing="20.0" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Back Button -->
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Retour au menu principal"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo and Title -->
+                <StackPane styleClass="logo-container">
+                    <SVGPath
+                            content="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M9,17H7V10H9V17M13,17H11V7H13V17M17,17H15V13H17V17Z"
+                            fill="brown" scaleX="1.5" scaleY="1.5"/>
+                </StackPane>
+                <Label styleClass="header-label" text="TABLEAU DE BORD GÉNÉRAL"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Export Button -->
+                <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#handleExport"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Exporter les données"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- PDF Button -->
+                <Button fx:id="pdfBtn" mnemonicParsing="false" onAction="#handleGeneratePDF"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Générer un PDF"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M10,19L12,15H9V10L7,14H10V19Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Refresh Button -->
+                <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#handleRefresh"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Actualiser"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Settings Button -->
+                <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#handleSettings"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Paramètres"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Help Button -->
+                <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#handleHelp"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Aide"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER" styleClass="content-background">
+            <content>
+                <VBox spacing="20.0" styleClass="dashboard-content">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+
+                    <!-- Dashboard Header -->
+                    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="dashboard-header">
+                        <StackPane styleClass="dashboard-icon">
+                            <SVGPath content="M3,11H11V3H3M3,21H11V13H3M13,21H21V13H13M13,3V11H21V3"
+                                     fill="white" scaleX="1.5" scaleY="1.5"/>
+                        </StackPane>
+                        <VBox spacing="5">
+                            <Label styleClass="section-label" text="Tableau de Bord Général"/>
+                            <HBox spacing="10" alignment="CENTER_LEFT">
+                                <Label fx:id="dateLabel" styleClass="date-label" text="08/04/2025"/>
+                                <Label fx:id="timeframeLabel" styleClass="timeframe-badge" text="Vue mensuelle"/>
+                            </HBox>
+                        </VBox>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <!-- Timeframe Selector -->
+                        <ComboBox fx:id="timeframeSelector" promptText="Période" onAction="#handleTimeframeChange">
+                            <tooltip>
+                                <Tooltip text="Sélectionner la période d'analyse"/>
+                            </tooltip>
+                        </ComboBox>
+                    </HBox>
+
+                    <!-- Tab Pane for Different Dashboard Views -->
+                    <TabPane fx:id="dashboardTabs" styleClass="dashboard-tabs" VBox.vgrow="ALWAYS">
+                        <tabs>
+                            <!-- Vue d'ensemble Tab -->
+                            <Tab text="Vue d'ensemble" closable="false">
+                                <content>
+                                    <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+                                    <VBox spacing="20">
+                                        <!-- Key Stats Cards -->
+                                        <HBox spacing="20" alignment="CENTER">
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Candidats"/>
+                                                <Label fx:id="totalCandidatsLabel" styleClass="stat-value" text="0"/>
+                                                <HBox styleClass="stat-details">
+                                                    <Label fx:id="activeCandidatsLabel" styleClass="stat-detail" text="0 actifs"/>
+                                                    <Label styleClass="stat-separator" text="|"/>
+                                                    <Label fx:id="inactiveCandidatsLabel" styleClass="stat-detail" text="0 inactifs"/>
+                                                </HBox>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M20,17A2,2 0 0,0 22,15V4A2,2 0 0,0 20,2H9.46C9.81,2.61 10,3.3 10,4H20V15H11V17M15,7V9H9V22H7V16H5V22H3V14H1.5V9A2,2 0 0,1 3.5,7H15M8,4A2,2 0 0,1 6,6A2,2 0 0,1 4,4A2,2 0 0,1 6,2A2,2 0 0,1 8,4Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Moniteurs"/>
+                                                <Label fx:id="totalMoniteursLabel" styleClass="stat-value" text="0"/>
+                                                <HBox styleClass="stat-details">
+                                                    <Label fx:id="availableMoniteursLabel" styleClass="stat-detail" text="0 disponibles"/>
+                                                    <Label styleClass="stat-separator" text="|"/>
+                                                    <Label fx:id="unavailableMoniteursLabel" styleClass="stat-detail" text="0 indisponibles"/>
+                                                </HBox>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8L23,12V17H21A3,3 0 0,1 18,20A3,3 0 0,1 15,17H9A3,3 0 0,1 6,20A3,3 0 0,1 3,17H1V6C1,4.89 1.89,4 3,4H17V8H20M8,6V9H5V11H8V14H10V11H13V9H10V6H8Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Véhicules"/>
+                                                <Label fx:id="totalVehiculesLabel" styleClass="stat-value" text="0"/>
+                                                <HBox styleClass="stat-details">
+                                                    <Label fx:id="availableVehiculesLabel" styleClass="stat-detail" text="0 disponibles"/>
+                                                    <Label styleClass="stat-separator" text="|"/>
+                                                    <Label fx:id="unavailableVehiculesLabel" styleClass="stat-detail" text="0 indisponibles"/>
+                                                </HBox>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M16,9H21.5L16,3.5V9M7,2H17L23,8V18A2,2 0 0,1 21,20H7C5.89,20 5,19.1 5,18V4A2,2 0 0,1 7,2M3,6V22H21V24H3A2,2 0 0,1 1,22V6H3Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Examens"/>
+                                                <Label fx:id="totalExamensLabel" styleClass="stat-value" text="0"/>
+                                                <HBox styleClass="stat-details">
+                                                    <Label fx:id="examensReussisLabel" styleClass="stat-detail" text="0 réussis"/>
+                                                    <Label styleClass="stat-separator" text="|"/>
+                                                    <Label fx:id="examensEchouesLabel" styleClass="stat-detail" text="0 échoués"/>
+                                                </HBox>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Charts Row -->
+                                        <HBox spacing="20" VBox.vgrow="ALWAYS">
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Revenus par mois"/>
+                                                <BarChart fx:id="inscriptionsChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                                    <xAxis>
+                                                        <CategoryAxis label="Mois"/>
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis label="Nombre d'inscriptions"/>
+                                                    </yAxis>
+                                                </BarChart>
+                                            </VBox>
+
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Répartition des Examens par Type"/>
+                                                <PieChart fx:id="typeExamenChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Alerts and Upcoming Exams -->
+                                        <HBox spacing="20" VBox.vgrow="ALWAYS">
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Alertes"/>
+                                                <VBox fx:id="alertsContainer" spacing="10" VBox.vgrow="ALWAYS" styleClass="alerts-list">
+                                                    <!-- Alerts will be added dynamically -->
+                                                </VBox>
+                                            </VBox>
+
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Examens à Venir"/>
+                                                <VBox fx:id="upcomingExamsContainer" spacing="10" VBox.vgrow="ALWAYS" styleClass="upcoming-list">
+                                                    <!-- Upcoming exams will be added dynamically -->
+                                                </VBox>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Financial Overview -->
+                                        <VBox spacing="10" styleClass="chart-container">
+                                            <Label styleClass="chart-title" text="Aperçu Financier"/>
+                                            <HBox spacing="20">
+                                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                                        <StackPane styleClass="finance-icon-container">
+                                                            <SVGPath content="M11.8,10.9C9.53,10.31 8.8,9.7 8.8,8.75C8.8,7.66 9.81,6.9 11.5,6.9C13.28,6.9 13.94,7.75 14,9H16.21C16.14,7.28 15.09,5.7 13,5.19V3H10V5.16C8.06,5.58 6.5,6.84 6.5,8.77C6.5,11.08 8.41,12.23 11.2,12.9C13.7,13.5 14.2,14.38 14.2,15.31C14.2,16 13.71,17.1 11.5,17.1C9.44,17.1 8.63,16.18 8.5,15H6.32C6.44,17.19 8.08,18.42 10,18.83V21H13V18.85C14.95,18.5 16.5,17.35 16.5,15.3C16.5,12.46 14.07,11.5 11.8,10.9Z"
+                                                                     fill="green" scaleX="1.2" scaleY="1.2"/>
+                                                        </StackPane>
+                                                        <Label styleClass="finance-title" text="Revenus"/>
+                                                        <Region HBox.hgrow="ALWAYS"/>
+                                                        <Label fx:id="totalRevenueLabel" styleClass="finance-value" text="0 DT"/>
+                                                    </HBox>
+                                                    <ProgressBar fx:id="revenueProgressBar" progress="0.75" styleClass="revenue-progress"/>
+                                                    <Label fx:id="revenueThisMonthLabel" styleClass="finance-detail" text="0 DT ce mois"/>
+                                                </VBox>
+
+                                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                                    <HBox alignment="CENTER_LEFT" spacing="10">
+                                                        <StackPane styleClass="finance-icon-container">
+                                                            <SVGPath content="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                                                                     fill="red" scaleX="1.2" scaleY="1.2"/>
+                                                        </StackPane>
+                                                        <Label styleClass="finance-title" text="Dépenses"/>
+                                                        <Region HBox.hgrow="ALWAYS"/>
+                                                        <Label fx:id="totalExpensesLabel" styleClass="finance-value" text="0 DT"/>
+                                                    </HBox>
+                                                    <ProgressBar fx:id="expensesProgressBar" progress="0.6" styleClass="expenses-progress"/>
+                                                    <Label fx:id="expensesThisMonthLabel" styleClass="finance-detail" text="0 DT ce mois"/>
+                                                </VBox>
+                                            </HBox>
+                                        </VBox>
+                                    </VBox>
+                                    </ScrollPane>
+                                </content>
+                            </Tab>
+
+                            <!-- Candidats Tab -->
+                            <Tab text="Candidats" closable="false">
+                                <content>
+                                    <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+                                    <VBox spacing="20">
+                                        <!-- Candidats Stats -->
+                                        <HBox spacing="20" alignment="CENTER">
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Candidats"/>
+                                                <Label fx:id="totalCandidatsTab2Label" styleClass="stat-value" text="0"/>
+                                                <ProgressBar fx:id="candidatsActiveProgressBar" progress="0.85" styleClass="candidats-progress"/>
+                                                <Label fx:id="candidatsActivePercentLabel" styleClass="stat-detail" text="85% actifs"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"
+                                                             fill="green" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Candidats Actifs"/>
+                                                <Label fx:id="activeCandidatsTab2Label" styleClass="stat-value" text="0"/>
+                                                <Label fx:id="seancesThisMonthLabel" styleClass="stat-detail" text="0 séances ce mois"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
+                                                             fill="red" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Candidats Inactifs"/>
+                                                <Label fx:id="inactiveCandidatsTab2Label" styleClass="stat-value" text="0"/>
+                                                <Label fx:id="inactiveCandidatsPercentLabel" styleClass="stat-detail" text="15% du total"/>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Candidats Charts -->
+                                        <HBox spacing="20" VBox.vgrow="ALWAYS">
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Inscriptions par Mois"/>
+                                                <BarChart fx:id="inscriptionsTab2Chart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                                    <xAxis>
+                                                        <CategoryAxis label="Mois"/>
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis label="Nombre d'inscriptions"/>
+                                                    </yAxis>
+                                                </BarChart>
+                                            </VBox>
+
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Répartition par Catégorie"/>
+                                                <PieChart fx:id="categoriesChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                    </ScrollPane>
+                                </content>
+                            </Tab>
+
+                            <!-- Moniteurs Tab -->
+                            <Tab text="Moniteurs" closable="false">
+                                <content>
+                                    <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+                                    <VBox spacing="20">
+                                        <!-- Moniteurs Stats -->
+                                        <HBox spacing="20" alignment="CENTER">
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M20,17A2,2 0 0,0 22,15V4A2,2 0 0,0 20,2H9.46C9.81,2.61 10,3.3 10,4H20V15H11V17M15,7V9H9V22H7V16H5V22H3V14H1.5V9A2,2 0 0,1 3.5,7H15M8,4A2,2 0 0,1 6,6A2,2 0 0,1 4,4A2,2 0 0,1 6,2A2,2 0 0,1 8,4Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Moniteurs"/>
+                                                <Label fx:id="totalMoniteursTab3Label" styleClass="stat-value" text="0"/>
+                                                <ProgressBar fx:id="moniteursAvailableProgressBar" progress="0.85" styleClass="moniteurs-progress"/>
+                                                <Label fx:id="moniteursAvailablePercentLabel" styleClass="stat-detail" text="85% disponibles"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"
+                                                             fill="green" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Moniteurs Disponibles"/>
+                                                <Label fx:id="availableMoniteursTab3Label" styleClass="stat-value" text="0"/>
+                                                <Label styleClass="stat-detail" text="Prêts pour les séances"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
+                                                             fill="red" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Moniteurs Indisponibles"/>
+                                                <Label fx:id="unavailableMoniteursTab3Label" styleClass="stat-value" text="0"/>
+                                                <Label styleClass="stat-detail" text="Temporairement indisponibles"/>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Moniteurs Charts -->
+                                        <HBox spacing="20" VBox.vgrow="ALWAYS">
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Répartition par Catégorie"/>
+                                                <PieChart fx:id="moniteursCategoriesChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                                            </VBox>
+
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Charge de Travail"/>
+                                                <BarChart fx:id="moniteursWorkloadChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                                    <xAxis>
+                                                        <CategoryAxis label="Semaine"/>
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis label="Nombre de séances"/>
+                                                    </yAxis>
+                                                </BarChart>
+                                            </VBox>
+                                        </HBox>
+                                    </VBox>
+                                    </ScrollPane>
+                                </content>
+                            </Tab>
+
+                            <!-- Véhicules Tab -->
+                            <Tab text="Véhicules" closable="false">
+                                <content>
+                                    <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+                                    <VBox spacing="20">
+                                        <!-- Véhicules Stats -->
+                                        <HBox spacing="20" alignment="CENTER">
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8L23,12V17H21A3,3 0 0,1 18,20A3,3 0 0,1 15,17H9A3,3 0 0,1 6,20A3,3 0 0,1 3,17H1V6C1,4.89 1.89,4 3,4H17V8H20M8,6V9H5V11H8V14H10V11H13V9H10V6H8Z"
+                                                             fill="#bc0c0c" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Total des Véhicules"/>
+                                                <Label fx:id="totalVehiculesTab4Label" styleClass="stat-value" text="0"/>
+                                                <ProgressBar fx:id="vehiculesAvailableProgressBar" progress="0.85" styleClass="vehicules-progress"/>
+                                                <Label fx:id="vehiculesAvailablePercentLabel" styleClass="stat-detail" text="85% disponibles"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M13.78 15.44L19.78 21.44L18.36 22.86L12.33 16.86L13.78 15.44M17.5 10A3.5 3.5 0 0 0 14 6.5C14 4.5 15.5 3 17.5 3S21 4.5 21 6.5 19.5 10 17.5 10M5 20V12H2L12 3L22 12H9V10.5L5 20M6 10V8H12V10H6Z"
+                                                             fill="orange" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Maintenance"/>
+                                                <Label fx:id="maintenanceVehiculesLabel" styleClass="stat-value" text="0"/>
+                                                <Label styleClass="stat-detail" text="Véhicules nécessitant une maintenance"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M10,19L12,15H9V10L7,14H10V19Z"
+                                                             fill="red" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Documents"/>
+                                                <Label fx:id="documentsExpiringLabel" styleClass="stat-value" text="0"/>
+                                                <Label styleClass="stat-detail" text="Documents à renouveler prochainement"/>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Véhicules Charts -->
+                                        <HBox spacing="20" VBox.vgrow="ALWAYS">
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Répartition par Type"/>
+                                                <PieChart fx:id="vehiculesTypeChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                                            </VBox>
+
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Utilisation des Véhicules"/>
+                                                <BarChart fx:id="vehiculesUsageChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                                    <xAxis>
+                                                        <CategoryAxis label="Type"/>
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis label="Heures d'utilisation"/>
+                                                    </yAxis>
+                                                </BarChart>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Véhicules Alerts -->
+                                        <VBox spacing="10" styleClass="chart-container">
+                                            <Label styleClass="chart-title" text="Alertes Véhicules"/>
+                                            <VBox fx:id="vehiculesAlertsContainer" spacing="10" VBox.vgrow="ALWAYS" styleClass="alerts-list">
+                                                <!-- Alerts will be added dynamically -->
+                                            </VBox>
+                                        </VBox>
+                                    </VBox>
+                                    </ScrollPane>
+                                </content>
+                            </Tab>
+
+                            <!-- Finances Tab -->
+                            <Tab text="Finances" closable="false">
+                                <content>
+                                    <ScrollPane fitToWidth="true" fitToHeight="true" BorderPane.alignment="CENTER">
+                                    <VBox spacing="20">
+                                        <!-- Finances Stats -->
+                                        <HBox spacing="20" alignment="CENTER">
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M11.8,10.9C9.53,10.31 8.8,9.7 8.8,8.75C8.8,7.66 9.81,6.9 11.5,6.9C13.28,6.9 13.94,7.75 14,9H16.21C16.14,7.28 15.09,5.7 13,5.19V3H10V5.16C8.06,5.58 6.5,6.84 6.5,8.77C6.5,11.08 8.41,12.23 11.2,12.9C13.7,13.5 14.2,14.38 14.2,15.31C14.2,16 13.71,17.1 11.5,17.1C9.44,17.1 8.63,16.18 8.5,15H6.32C6.44,17.19 8.08,18.42 10,18.83V21H13V18.85C14.95,18.5 16.5,17.35 16.5,15.3C16.5,12.46 14.07,11.5 11.8,10.9Z"
+                                                             fill="green" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Revenus"/>
+                                                <Label fx:id="totalRevenueTab5Label" styleClass="stat-value" text="0 DT"/>
+                                                <Label fx:id="revenueThisMonthTab5Label" styleClass="stat-detail" text="0 DT ce mois"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"
+                                                             fill="red" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Dépenses"/>
+                                                <Label fx:id="totalExpensesTab5Label" styleClass="stat-value" text="0 DT"/>
+                                                <Label fx:id="expensesThisMonthTab5Label" styleClass="stat-detail" text="0 DT ce mois"/>
+                                            </VBox>
+
+                                            <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                                                <StackPane styleClass="stat-icon-container">
+                                                    <SVGPath content="M12,8H4A2,2 0 0,0 2,10V14A2,2 0 0,0 4,16H5V20A1,1 0 0,0 6,21H8A1,1 0 0,0 9,20V16H12L17,20V4L12,8M21.5,12C21.5,13.71 20.54,15.26 19,16V8C20.53,8.75 21.5,10.3 21.5,12Z"
+                                                             fill="blue" scaleX="1.2" scaleY="1.2"/>
+                                                </StackPane>
+                                                <Label styleClass="stat-title" text="Bénéfice"/>
+                                                <Label fx:id="totalProfitLabel" styleClass="stat-value" text="0 DT"/>
+                                                <Label fx:id="profitThisMonthLabel" styleClass="stat-detail" text="0 DT ce mois"/>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Finances Charts -->
+                                        <HBox spacing="20" VBox.vgrow="ALWAYS">
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Revenus par Mois"/>
+                                                <LineChart fx:id="revenueByMonthChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                                    <xAxis>
+                                                        <CategoryAxis label="Mois"/>
+                                                    </xAxis>
+                                                    <yAxis>
+                                                        <NumberAxis label="Revenus (DT)"/>
+                                                    </yAxis>
+                                                </LineChart>
+                                            </VBox>
+
+                                            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                                                <Label styleClass="chart-title" text="Dépenses par Catégorie"/>
+                                                <PieChart fx:id="expensesByCategoryChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                                            </VBox>
+                                        </HBox>
+
+                                        <!-- Recent Payments -->
+                                        <VBox spacing="10" styleClass="chart-container">
+                                            <Label styleClass="chart-title" text="Paiements Récents"/>
+                                            <VBox fx:id="recentPaymentsContainer" spacing="10" VBox.vgrow="ALWAYS" styleClass="payments-list">
+                                                <!-- Recent payments will be added dynamically -->
+                                            </VBox>
+                                        </VBox>
+
+                                        <!-- Payment Methods -->
+                                        <VBox spacing="10" styleClass="chart-container">
+                                            <Label styleClass="chart-title" text="Méthodes de Paiement"/>
+                                            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+                                                <PieChart fx:id="paymentMethodsChart" legendVisible="true" prefHeight="300.0"/>
+                                            </HBox>
+                                        </VBox>
+                                    </VBox>
+                                    </ScrollPane>
+                                </content>
+                            </Tab>
+                        </tabs>
+                    </TabPane>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

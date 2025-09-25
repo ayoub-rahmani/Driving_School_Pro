@@ -1,0 +1,506 @@
+/* Vehicle Screen Specific Styles */
+
+.vehicule-container {
+    -fx-background-image: url("../images/1.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Main containers with consistent styling */
+.vehicule-form {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 0);
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-padding: 24;
+}
+
+.vehicule-table-container {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-padding: 24;
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 0);
+}
+
+/* Vehicle info section with consistent styling */
+.vehicule-info-section {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 3 0;
+    -fx-padding: 0 0 24 0;
+    -fx-margin: 0 0 24 0;
+}
+
+/* Availability indicator with consistent styling */
+.availability-indicator {
+    -fx-background-radius: 50%;
+    -fx-min-width: 20px;
+    -fx-min-height: 20px;
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+    -fx-background-color: -fx-success;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 0, 0);
+}
+
+.availability-indicator-unavailable {
+    -fx-background-color: -fx-danger;
+}
+
+/* Type badge with consistent styling */
+.type-badge {
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-padding: 7 16;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 0);
+}
+
+/* Specific colors for each type */
+.type-badge-a {
+    -fx-background-color: #e74c3c; /* Red for type A (Moto) */
+}
+
+.type-badge-b {
+    -fx-background-color: #3498db; /* Blue for type B (Voiture) */
+}
+
+.type-badge-c {
+    -fx-background-color: #2ecc71; /* Green for type C (Camion) */
+}
+
+/* Header with consistent styling */
+.vehicule-header {
+    -fx-background-color: white;
+    -fx-background-radius: 20;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 0);
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+}
+
+/* Filter container with consistent styling */
+.filter-container {
+    -fx-background-color: white;
+    -fx-padding: 18px;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 12px;
+    -fx-border-width: 2;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+}
+
+/* Filter title with consistent styling */
+.filter-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Filter label with consistent styling */
+.filter-label {
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+}
+
+/* Filter buttons with consistent styling */
+.filter-button {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10 18;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 0);
+}
+
+.filter-button:hover {
+    -fx-background-color: derive(-fx-primary, 15%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.filter-reset-button {
+    -fx-background-color: -fx-medium-gray;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10 18;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0, 0, 0);
+}
+
+.filter-reset-button:hover {
+    -fx-background-color: derive(-fx-medium-gray, 15%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 6, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* Photo placeholder with consistent styling */
+.photo-placeholder {
+    -fx-background-radius: 60px;
+    -fx-border-radius: 60px;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 4;
+}
+
+/* Type radio buttons with consistent styling */
+.type-radio-container {
+    -fx-background-color: white;
+    -fx-background-radius: 16px;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 16px;
+    -fx-border-width: 2;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 4, 0, 0, 0);
+    -fx-padding: 16;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.type-radio-container:hover {
+    -fx-border-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 6, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.type-radio-text {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Status indicators with consistent styling */
+.status-active {
+    -fx-text-fill: -fx-success;
+    -fx-font-weight: bold;
+}
+
+.status-inactive {
+    -fx-text-fill: -fx-danger;
+    -fx-font-weight: bold;
+}
+
+
+/* Search box with consistent styling */
+.search-box {
+    -fx-background-color: white;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2;
+    -fx-background-radius: 10px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: #777777;
+}
+
+.search-box:focused {
+    -fx-border-color: -fx-primary;
+    -fx-effect: dropshadow(gaussian, rgba(0, 71, 171, 0.15), 5, 0, 0, 0);
+}
+
+.search-box:hover {
+    -fx-border-color: #777777;
+}
+
+/* Form elements with consistent styling */
+.form-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-dark-gray;
+    -fx-font-weight: 600;
+}
+
+.form-label:hover {
+    -fx-text-fill: -fx-primary;
+    -fx-underline: false;
+}
+
+.form-field {
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: #aaaaaa;
+    -fx-padding: 12 16;
+}
+
+.form-date-picker {
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.form-date-picker .arrow-button {
+    -fx-background-radius: 0 10 10 0;
+    -fx-background-color: -fx-primary;
+}
+
+.form-date-picker .arrow-button:hover {
+    -fx-background-color: -fx-primary-dark;
+}
+
+.form-date-picker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+/* Filter section with consistent styling */
+.filter-section {
+    -fx-background-color: rgba(248, 249, 250, 0.8);
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+/* Enhanced table styling */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+    -fx-background-radius: 12;
+}
+
+.table-view .column-header {
+    -fx-background-color: -fx-primary;
+    -fx-padding: 12px;
+    -fx-border-color: transparent transparent #aaaaaa transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: transparent transparent #cccccc transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8 0;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ffffff;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 1 3;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #000000;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 1 3;
+}
+
+/* Radio buttons and checkboxes with consistent styling */
+.radio-button,
+.check-box {
+    -fx-padding: 8;
+}
+
+.radio-button .radio,
+.check-box .box {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: #aaaaaa;
+}
+
+/* Section label with consistent styling */
+.section-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Left panel scroll enhancements */
+.left-panel-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.left-panel-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.left-panel-content {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0, 0, 0);
+    -fx-border-color: #aaaaaa;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-padding: 24;
+}
+
+/* Dashboard icon container */
+.dashboard-icon {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 50%;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-width: 50px;
+    -fx-max-height: 50px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 0);
+}
+
+/* Stat cards */
+.stat-card {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0, 0, 0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.stat-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-medium-gray;
+}
+
+.stat-value {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* Chart containers */
+.chart-container {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-border-color: #aaaaaa;
+    -fx-border-radius: 16;
+    -fx-border-width: 2;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 0);
+}
+
+.chart-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-padding: 0 0 10 0;
+}
+
+/* Chart styling */
+.chart-pie-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: #8a8a8a;
+    -fx-stroke-width: 2px;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 10px;
+}
+
+.chart-legend-item {
+    -fx-font-size: 14px;
+}
+
+.chart-legend-item-symbol {
+    -fx-background-radius: 4px;
+    -fx-padding: 5px;
+}
+
+.chart-bar {
+    -fx-bar-fill: -fx-primary;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-background-position: center center;
+}
+
+.axis {
+    -fx-font-size: 14px;
+    -fx-tick-label-fill: -fx-dark-gray;
+    -fx-font-family: "System";
+}
+
+.axis-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-gray;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 1px;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #e0e0e0;
+    -fx-stroke-width: 1px;
+}
+
+/* Document expiration warning */
+.document-expiring {
+    -fx-text-fill: -fx-danger;
+    -fx-font-weight: bold;
+}
+
+/* Document status indicators */
+.document-valid {
+    -fx-background-color: -fx-success;
+    -fx-background-radius: 50%;
+    -fx-min-width: 12px;
+    -fx-min-height: 12px;
+    -fx-max-width: 12px;
+    -fx-max-height: 12px;
+}
+
+.document-expiring-soon {
+    -fx-background-color: -fx-warning;
+    -fx-background-radius: 50%;
+    -fx-min-width: 12px;
+    -fx-min-height: 12px;
+    -fx-max-width: 12px;
+    -fx-max-height: 12px;
+}
+
+.document-expired {
+    -fx-background-color: -fx-danger;
+    -fx-background-radius: 50%;
+    -fx-min-width: 12px;
+    -fx-min-height: 12px;
+    -fx-max-width: 12px;
+    -fx-max-height: 12px;
+}
+
+

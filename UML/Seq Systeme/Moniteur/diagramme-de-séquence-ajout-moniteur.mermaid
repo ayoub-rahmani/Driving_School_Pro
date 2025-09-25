@@ -1,0 +1,52 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as MoniteurController
+    participant Svc as MoniteurService
+    participant Rep as MoniteurRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Cliquer sur "Ajouter"
+    IHM->>Ctrl: handleAjouter()
+    Ctrl->>Ctrl: clearForm()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Afficher formulaire vide
+    Utilisateur->>IHM: Remplir formulaire
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: validateForm()
+    alt Validation réussie
+        Ctrl->>Ctrl: Créer objet Moniteur
+        Ctrl->>Svc: validateUniqueness(moniteur)
+        Svc->>Rep: existsByCin(cin, null)
+        Rep->>DB: SELECT COUNT(*) FROM moniteur WHERE cin = ?
+        DB->>Rep: Résultat
+        Rep->>Svc: Résultat
+        Svc->>Rep: existsCinInCandidat(cin)
+        Rep->>DB: SELECT COUNT(*) FROM candidat WHERE cin = ?
+        DB->>Rep: Résultat
+        Rep->>Svc: Résultat
+        Svc->>Rep: existsByNumPermis(numPermis, null)
+        Rep->>DB: SELECT COUNT(*) FROM moniteur WHERE num_permis = ?
+        DB->>Rep: Résultat
+        Rep->>Svc: Résultat
+        Svc->>Ctrl: Liste d'erreurs
+        alt Pas d'erreurs d'unicité
+            Ctrl->>IHM: Afficher dialogue de confirmation
+            Utilisateur->>IHM: Confirmer enregistrement
+            Ctrl->>Svc: saveMoniteur(moniteur)
+            Svc->>Svc: Vérifier âge (>= 21 ans)
+            Svc->>Rep: save(moniteur)
+            Rep->>DB: INSERT INTO moniteur
+            DB->>Rep: ID généré
+            Rep->>Svc: Moniteur avec ID
+            Svc->>Ctrl: Moniteur enregistré
+            Ctrl->>Ctrl: loadMoniteurs()
+            Ctrl->>Ctrl: disableForm(true)
+            Ctrl->>IHM: Afficher notification de succès
+        else Erreurs d'unicité
+            Ctrl->>IHM: Afficher erreurs d'unicité
+        end
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

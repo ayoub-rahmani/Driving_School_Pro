@@ -1,0 +1,32 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as CandidatController
+    participant Svc as CandidatService
+    participant Rep as CandidatRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Cliquer sur "Ajouter"
+    IHM->>Ctrl: handleAjouter()
+    Ctrl->>IHM: Afficher formulaire vide
+    Utilisateur->>IHM: Remplir formulaire
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: validateForm()
+    Ctrl->>Svc: validateUniqueness(candidat)
+    Svc->>Rep: existsByCin(cin, null)
+    Rep->>DB: SELECT COUNT(*) FROM candidat WHERE cin = ?
+    DB->>Rep: Résultat
+    Rep->>Svc: Résultat
+    Svc->>Ctrl: Liste d'erreurs
+    alt Validation réussie
+        Ctrl->>Svc: saveCandidat(candidat)
+        Svc->>Rep: save(candidat)
+        Rep->>DB: INSERT INTO candidat
+        DB->>Rep: ID généré
+        Rep->>Svc: Candidat avec ID
+        Svc->>Ctrl: Candidat enregistré
+        Ctrl->>IHM: Afficher notification de succès
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

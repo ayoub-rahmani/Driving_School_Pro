@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefHeight="900.0" prefWidth="1600.0"
+            styleClass="driving-school-container"
+            stylesheets="@../Styles/Common.css,@../Styles/DrivingSchool.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.DrivingSchoolController">
+    <!-- Header Section -->
+    <top>
+        <HBox alignment="CENTER" spacing="20.0" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Back Button -->
+                <Button fx:id="backBtn" mnemonicParsing="false" onAction="#handleBack"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Retour"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo and Title -->
+                <StackPane styleClass="logo-container">
+                    <SVGPath
+                            content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"
+                            fill="brown" scaleX="1.5" scaleY="1.5"/>
+                </StackPane>
+                <Label styleClass="header-label" text="CONFIGURATION DE L'ÉCOLE DE CONDUITE"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Settings Button -->
+                <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#handleSettings"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Paramètres"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Help Button -->
+                <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#handleHelp"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Aide"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <!-- Central Content Area -->
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="content-background">
+            <content>
+                <VBox spacing="20.0" styleClass="driving-school-form">
+                    <children>
+                        <!-- School Header -->
+                        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="driving-school-header">
+                            <ImageView fx:id="logoImageView" fitHeight="120.0" fitWidth="120.0"
+                                       pickOnBounds="true" preserveRatio="true" styleClass="photo-placeholder"/>
+                            <VBox spacing="8">
+                                <Label fx:id="schoolNameLabel" styleClass="section-label" text="École de Conduite"/>
+                            </VBox>
+                        </HBox>
+
+                        <!-- School Information Section -->
+                        <TitledPane animated="true" text="Informations de l'école" expanded="true">
+                            <content>
+                                <GridPane hgap="30.0" vgap="20.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="150.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="150.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="350.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <Label text="Nom:" styleClass="form-label"/>
+                                        <TextField fx:id="nameField" GridPane.columnIndex="1" styleClass="form-field"/>
+
+                                        <Label text="Matricule Fiscale:" GridPane.columnIndex="2" styleClass="form-label"/>
+                                        <TextField fx:id="matriculeField" GridPane.columnIndex="3" styleClass="form-field"/>
+
+                                        <Label text="Adresse:" GridPane.rowIndex="1" styleClass="form-label"/>
+                                        <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                                   styleClass="form-field"/>
+
+                                        <Label text="Téléphone:" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="form-label"/>
+                                        <TextField fx:id="phoneField" GridPane.columnIndex="3" GridPane.rowIndex="1"
+                                                   styleClass="form-field"/>
+
+                                        <Label text="Email:" GridPane.rowIndex="2" styleClass="form-label"/>
+                                        <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                                   styleClass="form-field"/>
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                    </padding>
+                                </GridPane>
+                            </content>
+                        </TitledPane>
+
+                        <!-- Action Buttons -->
+                        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                            <Button onAction="#handleUploadLogo" styleClass="button" text="Charger Logo">
+                                <tooltip>
+                                    <Tooltip text="Charger un nouveau logo"/>
+                                </tooltip>
+                                <graphic>
+                                    <SVGPath content="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M10,19L12,17L9,14H15V12H9L12,9L10,7L6,11L10,15Z"
+                                             fill="white"/>
+                                </graphic>
+                            </Button>
+                            <Button fx:id="saveButton" onAction="#handleSave" styleClass="button" text="Enregistrer">
+                                <tooltip>
+                                    <Tooltip text="Enregistrer les modifications"/>
+                                </tooltip>
+                                <graphic>
+                                    <SVGPath content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                             fill="white"/>
+                                </graphic>
+                            </Button>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

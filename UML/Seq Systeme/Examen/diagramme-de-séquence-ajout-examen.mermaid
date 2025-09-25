@@ -1,0 +1,61 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as ExamenController
+    participant Svc as ExamenService
+    participant Rep as ExamenRep
+    participant CandidatSvc as CandidatService
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Cliquer sur "Ajouter"
+    IHM->>Ctrl: handleAjouter()
+    Ctrl->>Ctrl: clearForm()
+    Ctrl->>Ctrl: disableForm(false)
+    Ctrl->>IHM: Afficher formulaire vide
+    Utilisateur->>IHM: Sélectionner un candidat
+    IHM->>Ctrl: candidatComboBox.selectedItemProperty().listener
+    Ctrl->>Ctrl: loadCandidatInfo(candidat)
+    Utilisateur->>IHM: Sélectionner type d'examen
+    Utilisateur->>IHM: Remplir date, lieu et frais
+    Utilisateur->>IHM: Cliquer sur "Enregistrer"
+    IHM->>Ctrl: handleEnregistrer()
+    Ctrl->>Ctrl: validateForm()
+    alt Validation réussie
+        alt Type d'examen = "Conduite"
+            Ctrl->>Ctrl: hasCodeExamen(candidatId, dateExamen)
+            alt Pas d'examen de code validé
+                Ctrl->>IHM: Afficher message d'erreur
+            else Examen de code validé
+                Ctrl->>Ctrl: Créer objet Examen
+                Ctrl->>IHM: Afficher dialogue de confirmation
+                Utilisateur->>IHM: Confirmer enregistrement
+                Ctrl->>Svc: saveExamen(examen)
+                Svc->>Rep: save(examen)
+                Rep->>DB: INSERT INTO examen
+                DB->>Rep: ID généré
+                Rep->>Svc: Examen avec ID
+                Svc->>Ctrl: Examen enregistré
+                Ctrl->>Audit: logAction("CREATE", "EXAMEN", id, message)
+                Ctrl->>Ctrl: loadExamens()
+                Ctrl->>Ctrl: disableForm(true)
+                Ctrl->>IHM: Afficher notification de succès
+            end
+        else Type d'examen = "Code"
+            Ctrl->>Ctrl: Créer objet Examen
+            Ctrl->>IHM: Afficher dialogue de confirmation
+            Utilisateur->>IHM: Confirmer enregistrement
+            Ctrl->>Svc: saveExamen(examen)
+            Svc->>Rep: save(examen)
+            Rep->>DB: INSERT INTO examen
+            DB->>Rep: ID généré
+            Rep->>Svc: Examen avec ID
+            Svc->>Ctrl: Examen enregistré
+            Ctrl->>Audit: logAction("CREATE", "EXAMEN", id, message)
+            Ctrl->>Ctrl: loadExamens()
+            Ctrl->>Ctrl: disableForm(true)
+            Ctrl->>IHM: Afficher notification de succès
+        end
+    else Validation échouée
+        Ctrl->>IHM: Afficher erreurs de validation
+    end

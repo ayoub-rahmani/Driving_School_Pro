@@ -1,0 +1,79 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant SvcPaiement as PaiementService
+    participant SvcDepense as DepenseService
+    participant RepPaiement as PaiementRep
+    participant RepDepense as DepenseRep
+    participant DB as Base de Données
+
+    Utilisateur->>IHM: Cliquer sur "Tableau de Bord"
+    IHM->>Ctrl: toggleDashboard()
+    Ctrl->>Ctrl: isDashboardVisible = !isDashboardVisible
+    Ctrl->>IHM: Afficher le tableau de bord
+    Utilisateur->>IHM: Cliquer sur "Actualiser"
+    IHM->>Ctrl: handleRefreshDashboard()
+    Ctrl->>Ctrl: updateDashboard()
+    
+    Ctrl->>SvcPaiement: getTotalPaiements()
+    SvcPaiement->>RepPaiement: getAll()
+    RepPaiement->>DB: SELECT * FROM paiements
+    DB->>RepPaiement: Liste des paiements
+    RepPaiement->>SvcPaiement: Liste des paiements
+    SvcPaiement->>Ctrl: Total des revenus
+    
+    Ctrl->>SvcDepense: getTotalDepenses()
+    SvcDepense->>RepDepense: getAll()
+    RepDepense->>DB: SELECT * FROM depenses
+    DB->>RepDepense: Liste des dépenses
+    RepDepense->>SvcDepense: Liste des dépenses
+    SvcDepense->>Ctrl: Total des dépenses
+    
+    Ctrl->>Ctrl: Calculer bénéfice net et taux de rentabilité
+    Ctrl->>IHM: Mettre à jour les labels de statistiques
+    
+    Ctrl->>Ctrl: updateRevenusChart()
+    Ctrl->>SvcPaiement: getPaiementsByTypeServiceSummary()
+    SvcPaiement->>RepPaiement: getAll()
+    RepPaiement->>DB: SELECT * FROM paiements
+    DB->>RepPaiement: Liste des paiements
+    RepPaiement->>SvcPaiement: Liste des paiements
+    SvcPaiement->>Ctrl: Répartition des revenus par type
+    Ctrl->>IHM: Mettre à jour revenusByTypeChart
+    
+    Ctrl->>Ctrl: updateDepensesChart()
+    Ctrl->>SvcDepense: getDepensesByCategorieSummary()
+    SvcDepense->>RepDepense: getAll()
+    RepDepense->>DB: SELECT * FROM depenses
+    DB->>RepDepense: Liste des dépenses
+    RepDepense->>SvcDepense: Liste des dépenses
+    SvcDepense->>Ctrl: Répartition des dépenses par catégorie
+    Ctrl->>IHM: Mettre à jour depensesByCategorieChart
+    
+    Ctrl->>Ctrl: updateMethodePaiementChart()
+    Ctrl->>SvcPaiement: getPaiementsByMethodePaiementSummary()
+    SvcPaiement->>RepPaiement: getAll()
+    RepPaiement->>DB: SELECT * FROM paiements
+    DB->>RepPaiement: Liste des paiements
+    RepPaiement->>SvcPaiement: Liste des paiements
+    SvcPaiement->>Ctrl: Répartition des paiements par méthode
+    Ctrl->>IHM: Mettre à jour methodePaiementChart
+    
+    Ctrl->>Ctrl: updateMensuelChart()
+    Ctrl->>SvcPaiement: getPaiementsByMonthForYear(currentYear)
+    SvcPaiement->>RepPaiement: getAll()
+    RepPaiement->>DB: SELECT * FROM paiements
+    DB->>RepPaiement: Liste des paiements
+    RepPaiement->>SvcPaiement: Liste des paiements
+    SvcPaiement->>Ctrl: Revenus mensuels
+    
+    Ctrl->>SvcDepense: getDepensesByMonthForYear(currentYear)
+    SvcDepense->>RepDepense: getAll()
+    RepDepense->>DB: SELECT * FROM depenses
+    DB->>RepDepense: Liste des dépenses
+    RepDepense->>SvcDepense: Liste des dépenses
+    SvcDepense->>Ctrl: Dépenses mensuelles
+    
+    Ctrl->>IHM: Mettre à jour revenusDepensesMensuelChart
+    Ctrl->>IHM: Afficher notification de succès

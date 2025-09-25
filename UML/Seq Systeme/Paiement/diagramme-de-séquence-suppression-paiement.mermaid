@@ -1,0 +1,31 @@
+sequenceDiagram
+    actor Utilisateur
+    participant IHM as Interface Utilisateur
+    participant Ctrl as PaiementController
+    participant Svc as PaiementService
+    participant Rep as PaiementRep
+    participant DB as Base de Données
+    participant Audit as AuditLogService
+
+    Utilisateur->>IHM: Sélectionner un paiement dans la table
+    IHM->>Ctrl: paiementTable.getSelectionModel().selectedItemProperty().listener
+    Ctrl->>Ctrl: selectedPaiement = newSelection
+    Utilisateur->>IHM: Cliquer sur "Supprimer"
+    IHM->>Ctrl: handleSupprimer()
+    alt Aucun paiement sélectionné
+        Ctrl->>IHM: Afficher message "Veuillez sélectionner un paiement"
+    else Paiement sélectionné
+        Ctrl->>IHM: Afficher dialogue de confirmation
+        Utilisateur->>IHM: Confirmer suppression
+        Ctrl->>Audit: logAction("DELETE", "PAIEMENT", id, message)
+        Ctrl->>Svc: deletePaiement(selectedPaiement.getId())
+        Svc->>Rep: delete(id)
+        Rep->>DB: DELETE FROM paiements WHERE id = ?
+        DB->>Rep: Nombre de lignes affectées
+        Rep->>Svc: Confirmation de suppression
+        Svc->>Ctrl: Confirmation de suppression
+        Ctrl->>Ctrl: loadPaiements()
+        Ctrl->>Ctrl: clearForm()
+        Ctrl->>Ctrl: disableForm(true)
+        Ctrl->>IHM: Afficher notification de succès
+    end

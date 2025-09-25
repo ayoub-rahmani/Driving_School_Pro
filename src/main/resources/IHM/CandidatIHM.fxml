@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+
+<BorderPane prefHeight="900.0" prefWidth="1600.0"
+            styleClass="candidat-container"
+            stylesheets="@../Styles/Common.css,@../Styles/Candidat.css"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controllers.CandidatController">
+    <top>
+        <!-- Header Section -->
+        <HBox alignment="CENTER" spacing="20.0" styleClass="header" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Back Button -->
+                <Button fx:id="BackBtn" mnemonicParsing="false" onAction="#handleBack"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Retour"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo and Title -->
+                <StackPane styleClass="logo-container">
+                    <SVGPath
+                            content="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+                            fill="brown" scaleX="1.5" scaleY="1.5"/>
+                </StackPane>
+                <Label styleClass="header-label" text="GESTION DES CANDIDATS"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Dashboard Button -->
+                <Button fx:id="dashboardBtn" mnemonicParsing="false" onAction="#toggleDashboard"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Tableau de bord"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M3,11H11V3H3M3,21H11V13H3M13,21H21V13H13M13,3V11H21V3"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Settings Button (NEW) -->
+                <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#handleSettings"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Paramètres"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+
+                <!-- Help Button (NEW) -->
+                <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#handleHelp"
+                        styleClass="icon-button">
+                    <tooltip>
+                        <Tooltip text="Aide"/>
+                    </tooltip>
+                    <graphic>
+                        <SVGPath content="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6Z"
+                                 fill="white" scaleX="1.2" scaleY="1.2"/>
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <left>
+        <!-- Left Panel with Search, Table, and Actions -->
+        <ScrollPane styleClass="left-panel-scroll" fitToWidth="true">
+            <content>
+                <VBox prefWidth="400.0" spacing="20.0" styleClass="candidat-table-container, left-panel-content">
+                    <children>
+                        <!-- Search Bar -->
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                            <children>
+                                <TextField fx:id="rechercheField" promptText="Rechercher par nom ou CIN..."
+                                           HBox.hgrow="ALWAYS" styleClass="search-box" onKeyReleased="#handleRecherche"/>
+                                <Button fx:id="rechercheBtn" mnemonicParsing="false" onAction="#handleRecherche"
+                                        styleClass="icon-button">
+                                    <tooltip>
+                                        <Tooltip text="Rechercher"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath
+                                                content="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"
+                                                fill="#ff0202"/>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+
+                        <!-- Candidat Table View -->
+                        <TableView fx:id="candidatTable" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="idColumn" prefWidth="50.0" text="ID"/>
+                                <TableColumn fx:id="nomColumn" prefWidth="110.0" text="Nom"/>
+                                <TableColumn fx:id="prenomColumn" prefWidth="110.0" text="Prénom"/>
+                                <TableColumn fx:id="cinColumn" prefWidth="120.0" text="CIN"/>
+                            </columns>
+                            <placeholder>
+                                <Label text="Aucun candidat trouvé"/>
+                            </placeholder>
+                        </TableView>
+
+                        <!-- Action Buttons -->
+                        <HBox alignment="CENTER" spacing="15.0">
+                            <children>
+                                <Button fx:id="ajouterBtn" mnemonicParsing="false" onAction="#handleAjouter"
+                                        styleClass="button, button-success" text="Ajouter">
+                                    <tooltip>
+                                        <Tooltip text="Ajouter un nouveau candidat"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath content="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                                                 fill="white"/>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="modifierBtn" mnemonicParsing="false" onAction="#handleModifier"
+                                        styleClass="button, button-warning" text="Modifier">
+                                    <tooltip>
+                                        <Tooltip text="Modifier le candidat sélectionné"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath
+                                                content="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+                                                fill="white"/>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="supprimerBtn" mnemonicParsing="false" onAction="#handleSupprimer"
+                                        styleClass="button, button-danger" text="Supprimer">
+                                    <tooltip>
+                                        <Tooltip text="Supprimer le candidat sélectionné"/>
+                                    </tooltip>
+                                    <graphic>
+                                        <SVGPath
+                                                content="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                                                fill="white"/>
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </HBox>
+
+                        <!-- Document Generation Section -->
+                        <TitledPane animated="true" text="Génération de documents" expanded="false">
+                            <content>
+                                <VBox spacing="15" styleClass="document-generation-section">
+                                    <!-- Document Format Selection -->
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Label text="Format:" styleClass="filter-label"/>
+                                        <ComboBox fx:id="documentFormatComboBox" prefWidth="150">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="PDF"/>
+                                                    <String fx:value="Word (non dispo)"/>
+                                                    <String fx:value="Excel (non dispo)"/>
+                                                </FXCollections>
+                                            </items>
+                                            <value>
+                                                <String fx:value="PDF"/>
+                                            </value>
+                                        </ComboBox>
+                                    </HBox>
+
+                                    <VBox spacing="12">
+                                        <Button fx:id="generateFicheBtn" text="Générer Fiche Candidat"
+                                                styleClass="button" disable="true"
+                                                onAction="#handleGenerateDocument">
+                                            <tooltip>
+                                                <Tooltip text="Générer une fiche individuelle pour le candidat sélectionné"/>
+                                            </tooltip>
+                                            <graphic>
+                                                <SVGPath
+                                                        content="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20M10,19L12,15H9V10H15V15L13,19H10Z"
+                                                        fill="white"/>
+                                            </graphic>
+                                        </Button>
+
+                                        <Button fx:id="generateListBtn" text="Liste tous candidats actifs"
+                                                styleClass="button"
+                                                onAction="#handleGenerateDocument">
+                                            <tooltip>
+                                                <Tooltip text="Générer une liste de tous les candidats actifs"/>
+                                            </tooltip>
+                                            <graphic>
+                                                <SVGPath content="M3,4H21V8H3V4M3,10H21V14H3V10M3,16H21V20H3V16Z"
+                                                         fill="white"/>
+                                            </graphic>
+                                        </Button>
+
+                                        <HBox spacing="10" alignment="CENTER_LEFT">
+                                            <Label text="Catégorie:" styleClass="filter-label"/>
+                                            <ComboBox fx:id="categoryComboBox" prefWidth="100"/>
+                                            <Button fx:id="generateCategoryListBtn" text="Liste par catégorie"
+                                                    styleClass="button"
+                                                    onAction="#handleGenerateDocument">
+                                                <tooltip>
+                                                    <Tooltip text="Générer une liste de candidats par catégorie"/>
+                                                </tooltip>
+                                                <graphic>
+                                                    <SVGPath content="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"
+                                                             fill="white"/>
+                                                </graphic>
+                                            </Button>
+                                        </HBox>
+                                    </VBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+
+                        <!-- Filter Section -->
+                        <TitledPane animated="true" text="Filtres" expanded="false">
+                            <content>
+                                <VBox spacing="15" styleClass="filter-section">
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Label text="Statut:" styleClass="filter-label"/>
+                                        <ComboBox fx:id="filterStatusComboBox" prefWidth="150"
+                                                  promptText="Tous les statuts"/>
+                                    </HBox>
+
+                                    <HBox spacing="10" alignment="CENTER_LEFT">
+                                        <Label text="Catégorie:" styleClass="filter-label"/>
+                                        <ComboBox fx:id="filterCategoryComboBox" prefWidth="150"
+                                                  promptText="Toutes les catégories"/>
+                                    </HBox>
+
+                                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                                        <Button fx:id="resetFilterBtn" mnemonicParsing="false" text="Réinitialiser"
+                                                styleClass="button-secondary" onAction="#handleResetFilter">
+                                            <tooltip>
+                                                <Tooltip text="Réinitialiser tous les filtres"/>
+                                            </tooltip>
+                                        </Button>
+                                        <Button fx:id="applyFilterBtn" mnemonicParsing="false" text="Appliquer"
+                                                styleClass="button" onAction="#handleApplyFilter" >
+                                            <tooltip>
+                                                <Tooltip text="Appliquer les filtres sélectionnés" />
+                                            </tooltip>
+                                        </Button>
+                                    </HBox>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#handleExport"
+                                styleClass="button" text="Exporter les données" maxWidth="Infinity">
+                            <tooltip>
+                                <Tooltip text="Exporter les données de l'examen"/>
+                            </tooltip>
+                            <graphic>
+                                <SVGPath
+                                        content="M23,12L19,8V11H10V13H19V16M1,18V6C1,4.89 1.9,4 3,4H15A2,2 0 0,1 17,6V9H15V6H3V18H15V15H17V18A2,2 0 0,1 15,20H3A2,2 0 0,1 1,18Z"
+                                        fill="white"/>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+
+    <center>
+        <!-- Central Content Area: Candidate Form -->
+        <StackPane>
+            <children>
+                <!-- Form ScrollPane -->
+                <ScrollPane fx:id="formScrollPane" fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER"
+                            styleClass="content-background">
+                    <content>
+                        <VBox spacing="20.0" styleClass="candidat-form">
+                            <children>
+                                <!-- Candidate Header -->
+                                <HBox alignment="CENTER_LEFT" spacing="20" styleClass="candidat-header">
+                                    <!-- Candidate Photo -->
+                                    <ImageView fx:id="candidatPhoto"
+                                               fitHeight="40.0"
+                                               fitWidth="40.0"
+                                               styleClass="photo-placeholder, fixed-size-image">
+                                        <image>
+                                            <Image url="@../images/prof.png"/>
+                                        </image>
+                                    </ImageView>
+
+                                    <!-- Candidate Information -->
+                                    <VBox spacing="8">
+                                        <Label fx:id="candidatNameLabel" styleClass="section-label"
+                                               text="Nouveau Candidat"/>
+                                        <HBox spacing="10" alignment="CENTER_LEFT">
+                                            <Label fx:id="statusBadge" styleClass="badge" text="Nouveau"/>
+                                            <Label fx:id="categoryBadge" styleClass="candidat-info-badge" text="Type B"/>
+                                            <Label fx:id="dateBadge" styleClass="candidat-info-badge"
+                                                   text="Inscrit le 12/03/2025"/>
+                                        </HBox>
+                                    </VBox>
+                                </HBox>
+
+                                <!-- Personal Information Section -->
+                                <TitledPane animated="true" text="Informations personnelles" expanded="true">
+                                    <content>
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Nom:"/>
+                                                <TextField fx:id="nomField" GridPane.columnIndex="1"/>
+
+                                                <Label text="Prénom:" GridPane.columnIndex="2"/>
+                                                <TextField fx:id="prenomField" GridPane.columnIndex="3"/>
+
+                                                <Label text="CIN:" GridPane.rowIndex="1"/>
+                                                <TextField fx:id="cinField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                                                <Label text="Date de naissance:" GridPane.columnIndex="2"
+                                                       GridPane.rowIndex="1"/>
+                                                <DatePicker fx:id="dateNaissancePicker" GridPane.columnIndex="3"
+                                                            GridPane.rowIndex="1"/>
+
+                                                <Label text="Téléphone:" GridPane.rowIndex="2"/>
+                                                <TextField fx:id="telephoneField" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="2"/>
+
+                                                <Label text="Email:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                                                <TextField fx:id="emailField" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+                                                <Label text="Adresse:" GridPane.rowIndex="3"/>
+                                                <TextField fx:id="adresseField" GridPane.columnIndex="1"
+                                                           GridPane.columnSpan="3" GridPane.rowIndex="3"/>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Registration Information Section -->
+                                <TitledPane animated="true" text="Informations d'inscription" expanded="true">
+                                    <content>
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="120.0" prefHeight="120.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Date d'inscription:"/>
+                                                <DatePicker fx:id="dateInscriptionPicker" GridPane.columnIndex="1"/>
+
+                                                <Label text="Catégories permis:" GridPane.rowIndex="1"/>
+                                                <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                                      GridPane.columnSpan="3">
+                                                    <children>
+                                                        <VBox styleClass="category-checkbox">
+                                                            <children>
+                                                                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true"
+                                                                           preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../images/a.jpeg"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <CheckBox fx:id="categorieA" mnemonicParsing="false"
+                                                                          text="Type A (Moto)" styleClass="category-checkbox-text"/>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                                            </padding>
+                                                        </VBox>
+
+                                                        <VBox styleClass="category-checkbox">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true"
+                                                                           preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../images/B.png"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <CheckBox fx:id="categorieB" mnemonicParsing="false"
+                                                                          text="Type B (Voiture)" styleClass="category-checkbox-text"/>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                                            </padding>
+                                                        </VBox>
+
+                                                        <VBox styleClass="category-checkbox">
+                                                            <children>
+                                                                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true"
+                                                                           preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../images/C.jpg"/>
+                                                                    </image>
+                                                                </ImageView>
+                                                                <CheckBox fx:id="categorieC" mnemonicParsing="false"
+                                                                          text="Type C (Camion)" styleClass="category-checkbox-text"/>
+                                                            </children>
+                                                            <padding>
+                                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                                                            </padding>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="Statut:" GridPane.rowIndex="2"/>
+                                                <HBox alignment="CENTER_LEFT" spacing="20.0" GridPane.columnIndex="1"
+                                                      GridPane.rowIndex="2">
+                                                    <children>
+                                                        <RadioButton fx:id="actifOui" mnemonicParsing="false" text="Actif"
+                                                                     styleClass="status-active">
+                                                            <toggleGroup>
+                                                                <ToggleGroup fx:id="actifGroup"/>
+                                                            </toggleGroup>
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"
+                                                                        fill="#10b981"/>
+                                                            </graphic>
+                                                        </RadioButton>
+                                                        <RadioButton fx:id="actifNon" mnemonicParsing="false" text="Inactif"
+                                                                     styleClass="status-inactive"
+                                                                     toggleGroup="$actifGroup">
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
+                                                                        fill="#ef4444"/>
+                                                            </graphic>
+                                                        </RadioButton>
+                                                    </children>
+                                                </HBox>
+
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Documents Section -->
+                                <TitledPane animated="true" text="Documents" expanded="false">
+                                    <content>
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="180.0" prefHeight="180.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="Photo CIN:"/>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1">
+                                                    <children>
+                                                        <Label fx:id="cinFileLabel" text="Aucun fichier" HBox.hgrow="ALWAYS"/>
+                                                        <Button fx:id="selectCINBtn" mnemonicParsing="false"
+                                                                onAction="#handleSelectCIN" text="Parcourir"
+                                                                styleClass="button">
+                                                            <tooltip>
+                                                                <Tooltip text="Sélectionner une photo de la CIN"/>
+                                                            </tooltip>
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8V18A2,2 0 0,1 19,20M13,13V8H11V13H8L12,17L16,13H13Z"
+                                                                        fill="white"/>
+                                                            </graphic>
+                                                        </Button>
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="Photo d'identité:" GridPane.rowIndex="1"/>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1"
+                                                      GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label fx:id="photoFileLabel" text="Aucun fichier"
+                                                               HBox.hgrow="ALWAYS"/>
+                                                        <Button fx:id="selectPhotoBtn" mnemonicParsing="false"
+                                                                onAction="#handleSelectPhoto" text="Parcourir"
+                                                                styleClass="button">
+                                                            <tooltip>
+                                                                <Tooltip text="Sélectionner une photo d'identité"/>
+                                                            </tooltip>
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8V18A2,2 0 0,1 19,20M13,13V8H11V13H8L12,17L16,13H13Z"
+                                                                        fill="white"/>
+                                                            </graphic>
+                                                        </Button>
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="Certificat médical:" GridPane.rowIndex="2"/>
+                                                <HBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="1"
+                                                      GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label fx:id="certificatFileLabel" text="Aucun fichier"
+                                                               HBox.hgrow="ALWAYS"/>
+                                                        <Button fx:id="selectCertificatBtn" mnemonicParsing="false"
+                                                                onAction="#handleSelectCertificat" text="Parcourir"
+                                                                styleClass="button">
+                                                            <tooltip>
+                                                                <Tooltip text="Sélectionner un certificat médical"/>
+                                                            </tooltip>
+                                                            <graphic>
+                                                                <SVGPath
+                                                                        content="M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8V18A2,2 0 0,1 19,20M13,13V8H11V13H8L12,17L16,13H13Z"
+                                                                        fill="white"/>
+                                                            </graphic>
+                                                        </Button>
+                                                    </children>
+                                                </HBox>
+
+                                                <Label text="Aperçu:" GridPane.rowIndex="3"/>
+                                                <ImageView fx:id="documentPreview" fitHeight="180.0" fitWidth="350.0"
+                                                           pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="3" styleClass="document-preview"/>
+
+                                                <Button fx:id="viewCINBtn" mnemonicParsing="false" onAction="#handleViewCIN"
+                                                        text="Voir" styleClass="document-button" GridPane.columnIndex="2">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher la photo de la CIN"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button fx:id="viewPhotoBtn" mnemonicParsing="false"
+                                                        onAction="#handleViewPhoto" text="Voir" styleClass="document-button"
+                                                        GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher la photo d'identité"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Button fx:id="viewCertificatBtn" mnemonicParsing="false"
+                                                        onAction="#handleViewCertificat" text="Voir"
+                                                        styleClass="document-button"
+                                                        GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher le certificat médical"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Candidate Documents Section -->
+                                <TitledPane animated="true" text="Documents du candidat" expanded="false">
+                                    <content>
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="150.0"
+                                                                   prefWidth="150.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="CIN:"/>
+                                                <Label fx:id="cinPathLabel" text="Chemin CIN" GridPane.columnIndex="1"/>
+                                                <Button fx:id="viewCinPathBtn" mnemonicParsing="false"
+                                                        onAction="#handleViewCinPath" text="Voir" styleClass="document-button"
+                                                        GridPane.columnIndex="2">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher le chemin d'accès du fichier CIN"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Label text="Photo d'identité:" GridPane.rowIndex="1"/>
+                                                <Label fx:id="photoPathLabel" text="Chemin Photo" GridPane.columnIndex="1"
+                                                       GridPane.rowIndex="1"/>
+                                                <Button fx:id="viewPhotoPathBtn" mnemonicParsing="false"
+                                                        onAction="#handleViewPhotoPath" text="Voir"
+                                                        styleClass="document-button" GridPane.columnIndex="2"
+                                                        GridPane.rowIndex="1">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher le chemin d'accès de la photo d'identité"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Label text="Certificat médical:" GridPane.rowIndex="2"/>
+                                                <Label fx:id="certificatPathLabel" text="Chemin Certificat"
+                                                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                                <Button fx:id="viewCertificatPathBtn" mnemonicParsing="false"
+                                                        onAction="#handleViewCertificatPath" text="Voir"
+                                                        styleClass="document-button"
+                                                        GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher le chemin d'accès du certificat médical"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+
+                                                <Label text="Fiche PDF:" GridPane.rowIndex="3"/>
+                                                <Label fx:id="fichePdfPathLabel" text="Chemin Fiche PDF"
+                                                       GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                                <Button fx:id="viewFichePdfPathBtn" mnemonicParsing="false"
+                                                        onAction="#handleViewFichePdfPath" text="Voir"
+                                                        styleClass="document-button"
+                                                        GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                    <tooltip>
+                                                        <Tooltip text="Afficher le chemin d'accès de la fiche PDF"/>
+                                                    </tooltip>
+                                                    <graphic>
+                                                        <SVGPath
+                                                                content="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+                                                                fill="white"/>
+                                                    </graphic>
+                                                </Button>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                            </padding>
+                                        </GridPane>
+                                    </content>
+                                </TitledPane>
+
+                                <!-- Action Buttons -->
+                                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                                    <children>
+                                        <Button fx:id="annulerBtn" mnemonicParsing="false" onAction="#handleAnnuler"
+                                                styleClass="button, button-secondary" text="Annuler">
+                                            <tooltip>
+                                                <Tooltip text="Annuler les modifications"/>
+                                            </tooltip>
+                                            <graphic>
+                                                <SVGPath
+                                                        content="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+                                                        fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="enregistrerBtn" mnemonicParsing="false" onAction="#handleEnregistrer"
+                                                styleClass="button" text="Enregistrer">
+                                            <tooltip>
+                                                <Tooltip text="Enregistrer les informations du candidat"/>
+                                            </tooltip>
+                                            <graphic>
+                                                <SVGPath
+                                                        content="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"
+                                                        fill="white"/>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                    <padding>
+                                        <Insets top="15.0"/>
+                                    </padding>
+                                </HBox>
+                            </children>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+
+                <!-- Dashboard Panel -->
+                <VBox fx:id="dashboardPane" spacing="20.0" styleClass="dashboard-container" visible="false">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                    </padding>
+
+                    <!-- Dashboard Header -->
+                    <HBox alignment="CENTER_LEFT" spacing="20" styleClass="candidat-header">
+                        <StackPane styleClass="dashboard-icon">
+                            <SVGPath content="M3,11H11V3H3M3,21H11V13H3M13,21H21V13H13M13,3V11H21V3"
+                                     fill="white" scaleX="1.5" scaleY="1.5"/>
+                        </StackPane>
+                        <Label styleClass="section-label" text="Tableau de Bord"/>
+                    </HBox>
+
+                    <!-- Stats Cards -->
+                    <HBox spacing="20" alignment="CENTER">
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Total des candidats"/>
+                            <Label fx:id="totalCandidatsLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Candidats actifs"/>
+                            <Label fx:id="candidatsActifsLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
+                            <Label styleClass="stat-title" text="Candidats inactifs"/>
+                            <Label fx:id="candidatsInactifsLabel" styleClass="stat-value" text="0"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Charts -->
+                    <HBox spacing="20" VBox.vgrow="ALWAYS">
+                        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                            <Label styleClass="chart-title" text="Répartition par catégorie de permis"/>
+                            <PieChart fx:id="categoriePermisChart" legendVisible="true" VBox.vgrow="ALWAYS"/>
+                        </VBox>
+
+                        <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="chart-container">
+                            <Label styleClass="chart-title" text="Inscriptions par mois"/>
+                            <BarChart fx:id="inscriptionsParMoisChart" legendVisible="false" VBox.vgrow="ALWAYS">
+                                <xAxis>
+                                    <CategoryAxis label="Mois"/>
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis label="Nombre d'inscriptions"/>
+                                </yAxis>
+                            </BarChart>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Refresh Button -->
+                    <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                        <Button fx:id="refreshDashboardBtn" mnemonicParsing="false" onAction="#refreshDashboard"
+                                styleClass="button" text="Actualiser">
+                            <graphic>
+                                <SVGPath
+                                        content="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"
+                                        fill="white"/>
+                            </graphic>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>
+

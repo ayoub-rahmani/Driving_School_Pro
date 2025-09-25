@@ -1,0 +1,140 @@
+/* Main Screen Specific Styles */
+
+.main-container {
+    -fx-background-image: url("../images/1.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* Menu container with consistent styling */
+.menu-container {
+    -fx-background-color: rgba(255, 255, 255, 0.5); /* Changed to 0.2 opacity */
+    -fx-background-radius: 28;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 20, 0, 0, 0);
+    -fx-padding: 48;
+    -fx-border-color: #AAAAAA; /* Darker border */
+    -fx-border-width: 2; /* Thicker border */
+    -fx-border-radius: 28;
+}
+
+/* App title with consistent styling */
+.app-title {
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 3, 0, 0, 0),
+    dropshadow(gaussian, rgba(255, 255, 255, 0.9), 2, 0, 0, 0);
+    -fx-padding: 5 0;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+}
+
+/* Menu section with consistent styling */
+.menu-section {
+    -fx-spacing: 24;
+    -fx-padding: 16;
+}
+
+/* Menu section title with consistent styling */
+.menu-section-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-secondary;
+    -fx-padding: 0 0 16 0;
+
+    -fx-stroke: white;
+    -fx-stroke-width: 2;
+    -fx-border-color: #000000; /* Darker border */
+    -fx-border-width: 0 0 2 0; /* Thicker border */
+}
+
+/* Menu button with consistent styling */
+.menu-button {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-primary-dark;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 20 30;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 3; /* Thicker border */
+    -fx-graphic-text-gap: 20;
+    -fx-content-display: left;
+    -fx-alignment: center-left;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0, 0, 0);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.menu-button:hover {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+    -fx-border-color: -fx-primary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0, 0, 0);
+    -fx-translate-x: 8;
+}
+
+.menu-button .graphic {
+    -fx-fill: -fx-primary;
+}
+
+.menu-button:hover .graphic {
+    -fx-fill: white;
+}
+
+/* Version label with consistent styling */
+.version-label {
+    -fx-text-fill: -fx-medium-gray;
+    -fx-font-size: 14px;
+}
+
+/* Logo container with consistent styling */
+
+
+
+/* Main page scroll pane - single scrollbar for the entire page */
+.main-page-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-fit-to-width: true;
+    -fx-hbar-policy: never;
+    -fx-padding: 0;
+}
+
+.main-page-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.main-page-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 18; /* Wider scrollbar */
+}
+
+.main-page-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #888888; /* Darker thumb for better visibility */
+    -fx-background-radius: 9;
+}
+
+.main-page-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -fx-primary;
+}
+
+.main-page-scroll .scroll-bar:vertical .increment-button,
+.main-page-scroll .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+
+.button:hover #a,
+.menu-button:hover #a {
+    -fx-fill: white;
+}
+
+.main-page-scroll .scroll-bar:vertical .increment-arrow,
+.main-page-scroll .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
