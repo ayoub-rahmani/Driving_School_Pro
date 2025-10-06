@@ -62,7 +62,7 @@
 
 ## 🎥 Demo
 
-[![Watch Demo](https://img.shields.io/badge/🎬_Full_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+[![Watch Demo](https://img.shields.io/badge/🎬_Full_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/gXRtK-GG6nI)
 
 *Complete walkthrough: student registration, intelligent scheduling with conflict detection, map integration, payment management, and analytics dashboard.*
 
