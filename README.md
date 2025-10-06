@@ -1,14 +1,14 @@
-# 🚗 Auto-École Pro (Driving School Manager)
+# 🚗 Auto-École Pro
 
 <div align="center">
 
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![JavaFX](https://img.shields.io/badge/JavaFX-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
-**Complete driving school management system with map integration, student tracking, and payment management**
+**A comprehensive driving school management system with intelligent scheduling, conflict resolution, and real-time analytics**
 
-[Features](#-features) • [Screenshots](#-screenshots) • [Tech Stack](#-tech-stack)
+[Demo Video](#-demo) • [Features](#-features) • [Screenshots](#-screenshots)
 
 </div>
 
@@ -16,64 +16,75 @@
 
 ## 📋 About
 
-**Auto-École Pro** is a comprehensive desktop application designed to streamline driving school operations. Built with JavaFX, it offers an intuitive interface for managing students, instructors, vehicles, lessons, payments, and generates detailed reports with integrated map functionality.
+**Auto-École Pro** is a full-featured desktop application designed to streamline driving school operations. Built with JavaFX and MySQL, it provides an intuitive platform for managing students, instructors, vehicles, lessons, payments, and generates detailed reports with integrated map functionality and advanced conflict detection.
 
 ## ✨ Features
 
-- 👥 **Student Management** - Complete student profiles with personal info, license types, and registration tracking
-- 🗓️ **Session Scheduling** - Plan and manage driving lessons with calendar integration and location selection
-- 🗺️ **Map Integration** - Interactive map for selecting meeting points with GPS coordinates
-- 💳 **Payment Tracking** - Monitor payments, generate invoices, and track outstanding balances
-- 📊 **Dashboard & Analytics** - Real-time statistics and visual reports on instructors, students, and workload
-- 🚙 **Vehicle Management** - Track driving school vehicles and assign them to sessions
-- 👨‍🏫 **Instructor Management** - Monitor instructor availability and scheduling
-- 📄 **PDF Generation** - Export student records, receipts, and reports
-- 🔐 **Secure Login** - Authentication system with user credentials and "Remember Me" functionality
+- 👥 **Student Management** - Complete student profiles with progress tracking and document management
+- 🗓️ **Intelligent Scheduling** - Advanced calendar with automatic conflict detection for instructors, students, and vehicles
+- 🗺️ **Map Integration** - Interactive OpenStreetMap for selecting lesson meeting points with GPS coordinates
+- 💳 **Payment System** - Complete financial tracking with invoice generation and balance management
+- 📊 **Analytics Dashboard** - Real-time statistics, instructor workload charts, and performance metrics
+- 🚙 **Fleet Management** - Vehicle tracking, maintenance scheduling, and availability management
+- 👨‍🏫 **Instructor Portal** - Schedule management, availability settings, and performance tracking
+- ⌨️ **Keyboard Shortcuts** - Complete hotkey support for efficient workflow (Ctrl+N, Ctrl+S, F1, etc.)
+- 📱 **Help Center** - Built-in searchable documentation and contextual help system
+- 📄 **PDF Export** - Generate invoices, reports, and student documents
+- 🔐 **Secure Authentication** - Login system with role-based access and password recovery
 
 ## 🎯 Tech Stack
 
-- **Language**: Java
-- **UI Framework**: JavaFX with custom styling
-- **Database**: MySQL for data persistence
+- **Language**: Java 11+
+- **UI Framework**: JavaFX with FXML & Scene Builder
+- **Database**: MySQL 8.0
+- **Architecture**: MVC Pattern with DAO Layer
 - **Maps**: OpenStreetMap/Leaflet integration
-- **PDF Library**: iText/Apache PDFBox for document generation
-- **Architecture**: MVC pattern with DAO layer
+- **PDF Generation**: Apache PDFBox/iText
+- **Build Tool**: Maven
 
 ## 📸 Screenshots
 
 <div align="center">
 
-| Login Screen | Help Center |
-|-------------|-------------|
-| ![Login](screenshots/login.png) | ![Help](screenshots/help.png) |
+| Login Screen | Dashboard & Analytics |
+|-------------|----------------------|
+| ![Login](screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) |
 
-| Student Management | Dashboard & Statistics |
-|-------------------|----------------------|
-| ![Students](screenshots/students.png) | ![Dashboard](screenshots/dashboard.png) |
+| Student Management | Session Scheduling |
+|-------------------|-------------------|
+| ![Students](screenshots/students.png) | ![Sessions](screenshots/sessions.png) |
 
-| Payment Tracking | Session Management with Maps |
-|-----------------|----------------------------|
-| ![Payments](screenshots/payments.png) | ![Sessions](screenshots/sessions.png) |
+| Payment Tracking | Help Center |
+|-----------------|-------------|
+| ![Payments](screenshots/payments.png) | ![Help](screenshots/help.png) |
 
 </div>
 
+## 🎥 Demo
+
+[![Watch Demo](https://img.shields.io/badge/🎬_Full_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+
+*Complete walkthrough: student registration, intelligent scheduling with conflict detection, map integration, payment management, and analytics dashboard.*
+
 ## 🚀 Key Highlights
 
-- **Interactive Maps**: Choose lesson meeting points with real-time map visualization
-- **Comprehensive Tracking**: Monitor student progress from registration to license acquisition
-- **Financial Management**: Complete payment system with receipt generation and balance tracking
-- **Data Visualization**: Charts and graphs for instructor workload and category distribution
-- **Multi-Category Support**: Handle different license types (A, B, C, etc.)
-- **Export Capabilities**: Generate PDF reports and export data for record-keeping
+- **Smart Conflict Detection**: Automatically prevents scheduling overlaps across instructors, students, and vehicles
+- **Real-time Updates**: Live synchronization of all data across the application
+- **Interactive Maps**: Choose precise meeting locations with OpenStreetMap integration
+- **Comprehensive Tracking**: Monitor every aspect from student registration to license acquisition
+- **Professional Reports**: Generate detailed PDF reports for any date range or category
+- **Keyboard Productivity**: Full keyboard shortcut support for power users
+- **Built-in Help**: Contextual help system with searchable documentation
 
 ## 💡 What I Learned
 
-- Building complex desktop applications with JavaFX
-- Implementing MVC architecture for maintainable code
+- Building enterprise-level desktop applications with JavaFX
+- Implementing sophisticated scheduling algorithms with conflict resolution
+- Database design and optimization for complex multi-entity systems
 - Integrating third-party map services into desktop applications
-- Database design for multi-entity management systems
-- PDF generation and document handling in Java
-- Creating responsive and intuitive user interfaces
+- Creating responsive and accessible user interfaces
+- Managing concurrent operations and maintaining data consistency
+- PDF generation and professional document handling
 
 ## 📝 Installation
 
@@ -87,27 +98,22 @@ cd Driving_school_Pro
 # Import database
 mysql -u root -p < database/autoecole.sql
 
-# Configure database connection in config file
-# Update database credentials in src/config/Database.java
+# Configure database connection
+# Update credentials in src/config/Database.java
+
+# Build and run
+mvn clean install
+mvn javafx:run
 ```
 
 ## 🔧 Configuration
 
-Update the database configuration:
+Update database settings in `src/config/Database.java`:
 ```java
-// src/config/Database.java
 private static final String URL = "jdbc:mysql://localhost:3306/autoecole";
 private static final String USER = "your_username";
 private static final String PASSWORD = "your_password";
 ```
-
-## 📦 Dependencies
-
-- JavaFX 11+
-- MySQL Connector/J
-- iText or Apache PDFBox
-- Map library (OpenStreetMap)
-- Java Mail API (for email recovery)
 
 ## 👨‍💻 Developer
 
@@ -121,6 +127,6 @@ private static final String PASSWORD = "your_password";
 
 <div align="center">
 
-⭐ Star this repository if you find it helpful!
+⭐ If you found this project helpful, consider giving it a star!
 
 </div>
